@@ -78,6 +78,7 @@ Copy the directory contents to your target harness path:
 │   ├── index-template.md     # Template for .qrspi/INDEX.md living ADR
 │   └── phases-checklist.md   # Quick-reference phase gate checklist
 ├── scripts/
+│   ├── verify-security.sh    # POSIX security & integrity auditor (Trojan Source & anti-malware)
 │   └── verify-session.sh     # Agent-executable modular session validator
 ├── hooks/
 │   └── prompt-hook.sh        # Agent Lifecycle Hook (Claude Code / Gemini CLI)

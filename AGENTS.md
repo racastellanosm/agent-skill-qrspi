@@ -5,7 +5,7 @@
 **Audience:** AI agents and platform engineers contributing to or maintaining this skill.  
 **Standard:** [agentskills.io Open Specification](https://agentskills.io/specification)  
 **Documentation & Code Language:** English (all code, templates, scripts, and documentation).  
-**Version:** 1.5.0  
+**Version:** 1.6.0  
 
 ---
 
@@ -25,8 +25,10 @@ This repository is the canonical reference implementation and distribution packa
 ```text
 .
 ├── .github/
-│   └── workflows/
-│       └── ci.yml                 # CI/CD: YAML spec validation, shellcheck & multi-harness tests
+│   ├── workflows/
+│   │   ├── ci.yml                 # CI/CD: YAML spec validation, shellcheck & multi-harness tests
+│   │   └── security.yml           # Security: Gitleaks secret scanning & least-privilege audit
+│   └── CODEOWNERS                 # Mandatory owner approval rules for critical paths
 ├── hooks/
 │   └── prompt-hook.sh             # Agent Lifecycle Hook (Claude Code / Gemini CLI)
 ├── references/
@@ -39,6 +41,7 @@ This repository is the canonical reference implementation and distribution packa
 │   ├── index-template.md          # Template for .qrspi/INDEX.md (Living ADR)
 │   └── phases-checklist.md        # Compact phase-gate quality checklist
 ├── scripts/
+│   ├── verify-security.sh         # POSIX security auditor (Trojan Source, malware, exfil)
 │   └── verify-session.sh          # POSIX validator for modular QRSPI session directories
 ├── .gitignore                     # OS and editor ignore rules
 ├── AGENTS.md                      # Agent governance, harnessing, and release protocols
@@ -84,14 +87,17 @@ Before proposing changes or creating releases, run the following verification su
 # 1. Validate session directory structure
 ./scripts/verify-session.sh references/stage-templates
 
-# 2. Test installation in local multi-harness mode (dry run / test)
+# 2. Run repository security & integrity audit (Trojan Source, anti-malware, URI checks)
+./scripts/verify-security.sh
+
+# 3. Test installation in local multi-harness mode (dry run / test)
 ./install.sh --local --harness=all --force
 
-# 3. Clean up test artifacts
+# 4. Clean up test artifacts
 rm -rf .agents .gemini .claude .codex .opencode
 
-# 4. Verify ShellCheck on all scripts
-shellcheck install.sh scripts/verify-session.sh hooks/prompt-hook.sh
+# 5. Verify ShellCheck on all scripts
+shellcheck install.sh scripts/verify-session.sh scripts/verify-security.sh hooks/prompt-hook.sh
 ```
 
 ---
