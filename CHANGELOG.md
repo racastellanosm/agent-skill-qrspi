@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-08-19
+
+### Added
+- **Session-Aware Dynamic Model Tiering Hook**: Upgraded `hooks/prompt-hook.sh` to automatically detect the active session state and latest completed stage in `.qrspi/sessions/` upon prompt trigger.
+- **Proactive Token-Savings Guardrail**: Injects immediate, real-time Model Tier recommendations (`MEDIUM`, `HIGH`, or `LOW/FAST`) directly into the agent prompt stream before response execution to save tokens and optimize reasoning depth.
+
 ## [1.4.0] - 2026-08-19
 
 ### Added
