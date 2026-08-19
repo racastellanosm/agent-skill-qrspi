@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-08-19
+
+### Added
+- **Automated Security Pipeline (`.github/workflows/security.yml`)**: Integrated `gitleaks/gitleaks-action` for continuous secret and API key detection on push and PRs.
+- **Repository Security Auditor (`scripts/verify-security.sh`)**: Added POSIX auditor verifying Trojan Source bidirectional Unicode characters (CVE-2021-42576), reverse shells, base64 eval loops, and suspicious credential exfiltration.
+- **Least-Privilege CI Hardening**: Enforced `permissions: contents: read` across all GitHub Actions workflows to protect repository tokens.
+
 ## [1.5.0] - 2026-08-19
 
 ### Added
