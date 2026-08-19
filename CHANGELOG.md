@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-08-19
+
+### Fixed
+- **Seamless Remote Installer (`curl | sh`)**: Added automatic GitHub archive stream extraction in `install.sh` when executed via standard input pipes in external directories where local `SKILL.md` is absent.
+
 ## [1.6.0] - 2026-08-19
 
 ### Added
