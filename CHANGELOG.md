@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Automated Security Pipeline (`.github/workflows/security.yml`)**: Integrated `gitleaks/gitleaks-action` for continuous secret and API key detection on push and PRs.
 - **Repository Security Auditor (`scripts/verify-security.sh`)**: Added POSIX auditor verifying Trojan Source bidirectional Unicode characters (CVE-2021-42576), reverse shells, base64 eval loops, and suspicious credential exfiltration.
 - **Least-Privilege CI Hardening**: Enforced `permissions: contents: read` across all GitHub Actions workflows to protect repository tokens.
+- **Mandatory Code Ownership (`.github/CODEOWNERS`)**: Locked down all security scripts, CI workflows, and skills to require explicit repository owner review for any external contributions.
 
 ## [1.5.0] - 2026-08-19
 

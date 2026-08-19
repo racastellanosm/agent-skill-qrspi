@@ -25,9 +25,10 @@ This repository is the canonical reference implementation and distribution packa
 ```text
 .
 ├── .github/
-│   └── workflows/
-│       ├── ci.yml                 # CI/CD: YAML spec validation, shellcheck & multi-harness tests
-│       └── security.yml           # Security: Gitleaks secret scanning & least-privilege audit
+│   ├── workflows/
+│   │   ├── ci.yml                 # CI/CD: YAML spec validation, shellcheck & multi-harness tests
+│   │   └── security.yml           # Security: Gitleaks secret scanning & least-privilege audit
+│   └── CODEOWNERS                 # Mandatory owner approval rules for critical paths
 ├── hooks/
 │   └── prompt-hook.sh             # Agent Lifecycle Hook (Claude Code / Gemini CLI)
 ├── references/

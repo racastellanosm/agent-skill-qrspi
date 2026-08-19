@@ -1,0 +1,16 @@
+# ==============================================================================
+# GitHub Code Owners Configuration for agent-skill-qrspi
+# Requires explicit review from repository owner before PR merge if touched.
+# Standard: GitHub Branch Protection & Security Perimeter
+# ==============================================================================
+
+# Default fallback owner for everything
+* @racastellanosm
+
+# Critical security, CI/CD workflows, and installers
+.github/workflows/*   @racastellanosm
+scripts/*             @racastellanosm
+hooks/*               @racastellanosm
+install.sh            @racastellanosm
+SKILL.md              @racastellanosm
+AGENTS.md             @racastellanosm
