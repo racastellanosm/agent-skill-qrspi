@@ -36,11 +36,14 @@ npx skills find qrspi
 
 ### 2. Via Quick One-Liner (POSIX curl)
 ```bash
-# Install locally in current workspace
+# Install locally in current workspace (e.g. for Google Gemini / Antigravity)
+curl -sSL https://raw.githubusercontent.com/racastellanosm/agent-skill-qrspi/main/install.sh | sh -s -- --local --harness=gemini
+
+# Install locally for all supported harnesses
 curl -sSL https://raw.githubusercontent.com/racastellanosm/agent-skill-qrspi/main/install.sh | sh -s -- --local --harness=all
 
 # Or install globally for current user
-curl -sSL https://raw.githubusercontent.com/racastellanosm/agent-skill-qrspi/main/install.sh | sh -s -- --global --harness=all
+curl -sSL https://raw.githubusercontent.com/racastellanosm/agent-skill-qrspi/main/install.sh | sh -s -- --global --harness=gemini
 ```
 
 ### 3. Via Repository Clone & Interactive Installer
