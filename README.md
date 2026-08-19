@@ -1,7 +1,7 @@
 # QRSPI Agent Skill (`qrspi-methodology`)
 
 [![agentskills.io](https://img.shields.io/badge/spec-agentskills.io-blue.svg)](https://agentskills.io)
-[![skills.sh](https://skills.sh/b/racastellanosm/qrspi-agent-skill)](https://skills.sh/racastellanosm/qrspi-agent-skill)
+[![skills.sh](https://skills.sh/b/racastellanosm/agent-skill-qrspi)](https://skills.sh/racastellanosm/agent-skill-qrspi)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 
@@ -28,7 +28,7 @@ QRSPI enforces a strict phase-gated engineering process to eliminate hallucinati
 ### 1. Via `skills.sh` / Vercel Labs CLI
 ```bash
 # Add directly to your project workspace
-npx skills add https://github.com/racastellanosm/qrspi-agent-skill
+npx skills add https://github.com/racastellanosm/agent-skill-qrspi
 
 # Or search via find-skills
 npx skills find qrspi
@@ -37,16 +37,16 @@ npx skills find qrspi
 ### 2. Via Quick One-Liner (POSIX curl)
 ```bash
 # Install locally in current workspace
-curl -sSL https://raw.githubusercontent.com/racastellanosm/qrspi-agent-skill/main/install.sh | sh -s -- --local --harness=all
+curl -sSL https://raw.githubusercontent.com/racastellanosm/agent-skill-qrspi/main/install.sh | sh -s -- --local --harness=all
 
 # Or install globally for current user
-curl -sSL https://raw.githubusercontent.com/racastellanosm/qrspi-agent-skill/main/install.sh | sh -s -- --global --harness=all
+curl -sSL https://raw.githubusercontent.com/racastellanosm/agent-skill-qrspi/main/install.sh | sh -s -- --global --harness=all
 ```
 
 ### 3. Via Repository Clone & Interactive Installer
 ```bash
-git clone https://github.com/racastellanosm/qrspi-agent-skill.git
-cd qrspi-agent-skill
+git clone https://github.com/racastellanosm/agent-skill-qrspi.git
+cd agent-skill-qrspi
 ./install.sh
 ```
 
