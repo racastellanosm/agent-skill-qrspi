@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-08-19
+
+### Added
+- **Automated Lifecycle Hook Wire-Up**: `install.sh` now automatically generates and configures `hooks.json` for Antigravity & Gemini CLI (attaching `PreInvocation` to `./.gemini/hooks/qrspi-prompt-hook.sh`) and `settings.json` for Claude Code (`UserPromptSubmit`).
+- **Antigravity Protojson Contract Support**: Upgraded `hooks/prompt-hook.sh` with dual output mode, delivering structured `injectSteps` with ephemeral system messages on `PreInvocation` and plain text on standard CLI streams.
+
 ## [1.7.0] - 2026-08-19
 
 ### Fixed
