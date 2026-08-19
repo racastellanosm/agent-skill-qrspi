@@ -204,15 +204,72 @@ install_agent_hooks() {
         cp "${SOURCE_DIR}/hooks/prompt-hook.sh" "${hook_dir}/qrspi-prompt-hook.sh"
         chmod 755 "${hook_dir}/qrspi-prompt-hook.sh"
         log_info "Installed Claude Code Agent Hook: ${hook_dir}/qrspi-prompt-hook.sh"
+
+        # Register hook in Claude settings.json if not present
+        settings_file="${base_prefix}/.claude/settings.json"
+        if [ ! -f "$settings_file" ]; then
+          cat <<EOF > "$settings_file"
+{
+  "hooks": {
+    "UserPromptSubmit": "${hook_dir}/qrspi-prompt-hook.sh"
+  }
+}
+EOF
+          log_info "Generated Claude Hook Configuration: ${settings_file}"
+        fi
       fi
       ;;
-    gemini)
+    gemini|standard|all)
       hook_dir="${base_prefix}/.gemini/hooks"
       mkdir -p "$hook_dir"
       if [ -f "${SOURCE_DIR}/hooks/prompt-hook.sh" ]; then
         cp "${SOURCE_DIR}/hooks/prompt-hook.sh" "${hook_dir}/qrspi-prompt-hook.sh"
         chmod 755 "${hook_dir}/qrspi-prompt-hook.sh"
         log_info "Installed Gemini/Antigravity Agent Hook: ${hook_dir}/qrspi-prompt-hook.sh"
+
+        # Generate hooks.json for Antigravity & Gemini runtime discovery
+        hook_cmd="${hook_dir}/qrspi-prompt-hook.sh"
+        if [ "$target_scope" = "local" ]; then
+          hook_cmd="./.gemini/hooks/qrspi-prompt-hook.sh"
+        fi
+
+        hooks_config="${base_prefix}/.gemini/hooks.json"
+        if [ ! -f "$hooks_config" ]; then
+          cat <<EOF > "$hooks_config"
+{
+  "qrspi-prompt-guardrail": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "${hook_cmd}"
+      }
+    ]
+  }
+}
+EOF
+          log_info "Generated Antigravity/Gemini Hook Configuration: ${hooks_config}"
+        fi
+
+        # Also support .agents/hooks.json for standard root workspace
+        if [ "$target_scope" = "local" ]; then
+          agents_hooks="./.agents/hooks.json"
+          mkdir -p ./.agents
+          if [ ! -f "$agents_hooks" ]; then
+            cat <<EOF > "$agents_hooks"
+{
+  "qrspi-prompt-guardrail": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "./.gemini/hooks/qrspi-prompt-hook.sh"
+      }
+    ]
+  }
+}
+EOF
+            log_info "Generated Standard Agents Hook Configuration: ${agents_hooks}"
+          fi
+        fi
       fi
       ;;
   esac
