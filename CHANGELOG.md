@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-08-19
+
+### Added
+- **Socratic Stress-Testing in Phase 1 (Question)**: Integrated systematic interrogation patterns inspired by Matt Pocock's `grill-me` skill.
+- **"Zero Lazy Questions" Rule**: Directs agents to autonomously explore the codebase (`grep_search`, `find_by_name`, `view_file`) before asking questions to eliminate redundant back-and-forth.
+- **4 Failure Vectors Matrix**: Structured probing for failure modes, concurrency/idempotency, backward compatibility, and boundary limits in `references/stage-templates/1-question.md`.
+- **Decision Tree & Trade-Off Branching**: Interactive branch-by-branch evaluation of architectural options.
+- Enriched `references/phases-checklist.md` with Phase 1 stress-testing gates.
+
 ## [1.0.0] - 2026-08-19
 
 ### Added

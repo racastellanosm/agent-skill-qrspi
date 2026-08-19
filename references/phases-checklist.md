@@ -3,8 +3,10 @@
 Use this quick checklist to ensure quality gates are met before advancing across QRSPI phases:
 
 ## Phase 1: Question
+- [ ] Autonomous pre-check executed ("Zero Lazy Questions" rule: code explored before asking).
 - [ ] Requirements explicitly divided into Functional (FR) and Non-Functional (NFR).
-- [ ] Ambiguities resolved via proactive clarification.
+- [ ] Socratic stress-testing applied across 4 failure vectors (failure modes, concurrency, migration, boundaries).
+- [ ] Decision trees walked branch-by-branch and trade-offs agreed with user.
 - [ ] Success criteria and acceptance gates stated testably.
 
 ## Phase 2: Research

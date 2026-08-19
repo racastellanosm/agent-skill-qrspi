@@ -1,7 +1,7 @@
 ---
 name: qrspi-methodology
 description: Enforces the QRSPI (Question, Research, Structure, Plan, Implement) engineering methodology. Triggers whenever starting complex features, architectural refactors, multi-file bug investigations, system migrations, or new implementations to ensure zero hallucinations and deterministic software delivery.
-version: 1.0.0
+version: 1.1.0
 author: Platform Engineering
 license: MIT
 compatibility:
@@ -41,19 +41,24 @@ Every non-trivial engineering task **MUST** complete each phase sequentially bef
 
 ---
 
-## Phase 1: Question (Scope & Clarification)
+## Phase 1: Question (Scope, Socratic Stress-Testing & Alignment)
 
 ### Goal
-Eliminate requirements ambiguity, surface hidden constraints, and challenge implicit assumptions.
+Eliminate requirements ambiguity, challenge implicit assumptions, stress-test design branches, and establish shared technical alignment before modifying code.
 
 ### Action Items
-1. **Analyze User Intent**: Break down the prompt into functional requirements (FRs) and non-functional requirements (NFRs).
-2. **Detect Incomplete Information**: Identify missing interfaces, environment expectations, backward-compatibility needs, and performance budgets.
-3. **Ask Proactive Clarifications**: If critical ambiguities exist, ask concise, targeted questions before touching the codebase.
-4. **Persist Stage 1**: Write `.qrspi/sessions/YYYY-MM-DD_<feature-slug>/1-question.md`.
+1. **Autonomous Codebase Pre-Check ("Zero Lazy Questions" Rule)**: Before asking the user any question, actively explore the workspace (`grep_search`, `view_file`, `find_by_name`) to answer questions where codebase context is already available. Never ask what the repository already tells you.
+2. **Deconstruct Requirements**: Break down the user prompt into explicit Functional Requirements (FRs) and Non-Functional Requirements (NFRs).
+3. **Socratic Stress-Testing (4 Failure Vectors)**: Proactively probe and stress-test the proposal across:
+   - **Failure Modes & Resilience**: Downstream outages, network timeouts, fallback behaviors.
+   - **Concurrency & Idempotency**: Race conditions, parallel mutations, duplicate submissions.
+   - **Backward Compatibility & Migrations**: Breaking API contracts, legacy schema conversions.
+   - **Boundary Conditions & Limits**: Empty collections, null states, extreme payload sizes.
+4. **Walk Decision Trees Branch-by-Branch**: When multiple architectural paths exist, present the decision tree and validate trade-offs interactively with the user (`ask_question` / prompt).
+5. **Persist Stage 1**: Write `.qrspi/sessions/YYYY-MM-DD_<feature-slug>/1-question.md`.
 
 ### Hard Gate
-> **Checkpoint:** Proceed to Phase 2 only when the problem statement and acceptance criteria are 100% deterministic and free of contradictions.
+> **Checkpoint:** Proceed to Phase 2 only when the problem statement, acceptance criteria, and failure mode mitigations are 100% deterministic and mutually agreed upon.
 
 ---
 
