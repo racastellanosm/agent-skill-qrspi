@@ -2,6 +2,7 @@
 
 - **Feature:** `<feature-slug>`
 - **Date & Time:** `YYYY-MM-DD HH:MM:SS UTC`
+- **Cognitive Load / Model Tier:** `HIGH (Deep Reasoning / Extended Thinking)`
 - **Status:** `[DRAFT | APPROVED]`
 
 ---

@@ -1,7 +1,7 @@
 ---
 name: qrspi-methodology
 description: Enforces the QRSPI (Question, Research, Structure, Plan, Implement) engineering methodology. Triggers whenever starting complex features, architectural refactors, multi-file bug investigations, system migrations, or new implementations to ensure zero hallucinations and deterministic software delivery.
-version: 1.3.0
+version: 1.4.0
 author: Platform Engineering
 license: MIT
 compatibility:
@@ -143,6 +143,27 @@ To prevent oversized documents, maintain token-efficient context, and enable fri
 ### Handoff Mechanics:
 - **Subagent / Resumed Task**: An implementer agent only needs to read `3-structure.md` and `4-plan.md` to start working immediately, saving up to 80% context tokens compared to monolithic files.
 - **Design Review / PR Review**: Reviewers can review `3-structure.md` for architectural approval and `5-implement.md` for verification proof in Pull Requests.
+
+---
+
+## Dynamic Model Tiering & Cognitive Load Routing
+
+To balance cost, speed, and reasoning depth, QRSPI enforces cognitive tiering across phases:
+
+| Phase | Cognitive Load | Recommended Model Tier | Execution Strategy |
+| :--- | :---: | :--- | :--- |
+| **1. Question** | **MEDIUM** | Standard Reasoning (`Sonnet` / `Flash-Thinking` / `GPT-4o`) | Fast interactive clarification, ambiguity detection. |
+| **2. Research** | **HIGH** | Deep Reasoning / Extended Thinking (`Pro` / `Sonnet-Thinking` / `o3-mini`) | Codebase AST discovery, deep dependency graphs, blast radius. |
+| **3. Structure** | **HIGH** | Deep Reasoning / Extended Thinking (`Pro` / `Sonnet-Thinking` / `o1`) | Architectural invariant design, interface contracts, trade-offs. |
+| **4. Plan** | **HIGH** | Deep Reasoning / Extended Thinking (`Pro` / `Sonnet-Thinking`) | Atomic task breakdown, test strategy formulation. |
+| **5. Implement** | **LOW / FAST** | Fast Code Execution (`Haiku` / `Flash` / `GPT-4o-mini`) | Atomic file edits, test runner execution, linter verification. |
+
+### Harness Enforcement Rules:
+1. **Subagent Delegation Mode (`invoke_subagent`)**:
+   - For **Research, Structure, and Plan**, invoke subagents with `Model: "pro"`.
+   - For **Implement**, invoke subagents with `Model: "flash"` or `Model: "flash_lite"`.
+2. **Single-Agent / Interactive Mode**:
+   - The agent MUST emit a **Model Tier Guardrail Notice** at phase boundaries whenever switching between High-reasoning and Fast-execution phases (e.g., *"💡 [QRSPI Guardrail]: Transitioning to Phase 3 (Structure). Recommended model weight: HIGH / Thinking"*).
 
 ---
 

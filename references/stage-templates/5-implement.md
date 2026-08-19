@@ -2,6 +2,7 @@
 
 - **Feature:** `<feature-slug>`
 - **Date & Time:** `YYYY-MM-DD HH:MM:SS UTC`
+- **Cognitive Load / Model Tier:** `LOW / FAST (Atomic Code Execution)`
 - **Status:** `[IN_PROGRESS | COMPLETED | FAILED]`
 - **Handoff Ready:** `[YES | NO]`
 
