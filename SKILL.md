@@ -153,10 +153,10 @@ To balance cost, speed, and reasoning depth, QRSPI enforces cognitive tiering ac
 | Phase | Cognitive Load | Recommended Model Tier | Execution Strategy |
 | :--- | :---: | :--- | :--- |
 | **1. Question** | **MEDIUM** | Standard Reasoning (`Gemini 3.7 Flash` / `Claude 3.7 Sonnet` / `GPT-4o`) | Fast interactive clarification, ambiguity detection. |
-| **2. Research** | **HIGH** | Deep Reasoning / Thinking (`Gemini 3.7 Pro` / `Claude 3.7 Sonnet-Thinking` / `o3-mini`) | Codebase AST discovery, deep dependency graphs, blast radius. |
-| **3. Structure** | **HIGH** | Deep Reasoning / Thinking (`Gemini 3.7 Pro` / `Claude 3.7 Sonnet-Thinking` / `o1`) | Architectural invariant design, interface contracts, trade-offs. |
-| **4. Plan** | **HIGH** | Deep Reasoning / Thinking (`Gemini 3.7 Pro` / `Claude 3.7 Sonnet-Thinking`) | Atomic task breakdown, test strategy formulation. |
-| **5. Implement** | **LOW / FAST** | Fast Code Execution (`Gemini 3.6 Flash` / `Claude 3.5 Haiku` / `GPT-4o-mini`) | Atomic file edits, test runner execution, linter verification. |
+| **2. Research** | **HIGH** | Deep Reasoning / Thinking (`Gemini 3.1 Pro` / `Claude 3.7 Sonnet-Thinking` / `o3-mini`) | Codebase AST discovery, deep dependency graphs, blast radius. |
+| **3. Structure** | **HIGH** | Deep Reasoning / Thinking (`Gemini 3.1 Pro` / `Claude 3.7 Sonnet-Thinking` / `o1`) | Architectural invariant design, interface contracts, trade-offs. |
+| **4. Plan** | **HIGH** | Deep Reasoning / Thinking (`Gemini 3.1 Pro` / `Claude 3.7 Sonnet-Thinking`) | Atomic task breakdown, test strategy formulation. |
+| **5. Implement** | **LOW / FAST** | Fast Code Execution (`Gemini 3.7 Flash` / `Claude 3.5 Haiku` / `GPT-4o-mini`) | Atomic file edits, test runner execution, linter verification. |
 
 ### Harness Enforcement Rules:
 1. **Subagent Delegation Mode (`invoke_subagent`)**:
