@@ -122,11 +122,11 @@ QRSPI dynamically matches task complexity with the appropriate AI model weight t
 
 | Phase | Cognitive Weight | Target Model Category | Function |
 | :--- | :---: | :--- | :--- |
-| **1. Question** | **MEDIUM** | Standard Reasoning (`Gemini 2.0 Flash` / `Claude 3.7 Sonnet` / `GPT-4o`) | Proactive Socratic probing, ambiguity clarification. |
-| **2. Research** | **HIGH** | Deep Reasoning (`Gemini 2.5 Pro` / `Claude 3.7 Sonnet-Thinking` / `o3-mini`) | Codebase traversal, AST mapping, blast radius analysis. |
-| **3. Structure** | **HIGH** | Deep Reasoning (`Gemini 2.5 Pro` / `Claude 3.7 Sonnet-Thinking` / `o1`) | Contract design, architectural invariants, trade-offs. |
-| **4. Plan** | **HIGH** | Deep Reasoning (`Gemini 2.5 Pro` / `Claude 3.7 Sonnet-Thinking`) | Atomic task breakdown, test-first strategy. |
-| **5. Implement** | **LOW / FAST** | Fast Execution (`Gemini 2.0 Flash-Lite` / `Claude 3.5 Haiku` / `GPT-4o-mini`) | Atomic file edits, test runner execution, linting. |
+| **1. Question** | **MEDIUM** | Standard Reasoning (`Gemini 3.7 Flash` / `Claude 3.7 Sonnet` / `GPT-4o`) | Proactive Socratic probing, ambiguity clarification. |
+| **2. Research** | **HIGH** | Deep Reasoning (`Gemini 3.7 Pro` / `Claude 3.7 Sonnet-Thinking` / `o3-mini`) | Codebase traversal, AST mapping, blast radius analysis. |
+| **3. Structure** | **HIGH** | Deep Reasoning (`Gemini 3.7 Pro` / `Claude 3.7 Sonnet-Thinking` / `o1`) | Contract design, architectural invariants, trade-offs. |
+| **4. Plan** | **HIGH** | Deep Reasoning (`Gemini 3.7 Pro` / `Claude 3.7 Sonnet-Thinking`) | Atomic task breakdown, test-first strategy. |
+| **5. Implement** | **LOW / FAST** | Fast Execution (`Gemini 3.6 Flash` / `Claude 3.5 Haiku` / `GPT-4o-mini`) | Atomic file edits, test runner execution, linting. |
 
 ---
 
