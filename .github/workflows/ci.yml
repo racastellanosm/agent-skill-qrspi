@@ -1,0 +1,43 @@
+name: Validate Agent Skill & Installer
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate SKILL.md Frontmatter & Spec
+        run: |
+          echo "Validating SKILL.md existence and format..."
+          test -f SKILL.md
+          grep -q "^name: qrspi-methodology" SKILL.md
+          grep -q "^description:" SKILL.md
+          grep -q "^license: MIT" SKILL.md
+
+      - name: Lint Shell Scripts
+        run: |
+          sudo apt-get update && sudo apt-get install -y shellcheck
+          shellcheck install.sh
+          shellcheck scripts/verify-session.sh
+          shellcheck hooks/prompt-hook.sh
+
+      - name: Test Installation Script (Dry Run & Multi-Harness)
+        run: |
+          ./install.sh --help
+          ./install.sh --local --harness=all --force
+          test -f .agents/skills/qrspi-methodology/SKILL.md
+          test -f .gemini/skills/qrspi-methodology/SKILL.md
+          test -f .claude/skills/qrspi-methodology/SKILL.md
+          test -f .codex/skills/qrspi-methodology/SKILL.md
+          test -f .opencode/skills/qrspi-methodology/SKILL.md
+
+      - name: Test Session Validator Script
+        run: |
+          ./scripts/verify-session.sh references/stage-templates
