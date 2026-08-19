@@ -26,7 +26,6 @@ jobs:
 
       - name: Lint Shell Scripts
         run: |
-          sudo apt-get update && sudo apt-get install -y shellcheck
           shellcheck install.sh
           shellcheck scripts/verify-session.sh
           shellcheck scripts/verify-security.sh
