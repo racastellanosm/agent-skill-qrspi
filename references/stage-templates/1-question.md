@@ -3,6 +3,7 @@
 - **Feature:** `<feature-slug>`
 - **Date & Time:** `YYYY-MM-DD HH:MM:SS UTC`
 - **Author/Agent:** `<Agent / User Name>`
+- **Cognitive Load / Model Tier:** `MEDIUM (Standard Reasoning)`
 - **Status:** `[DRAFT | IN_STRESS_TEST | ALIGNED]`
 
 ---
