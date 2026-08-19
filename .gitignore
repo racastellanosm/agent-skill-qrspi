@@ -1,0 +1,19 @@
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Editor & IDE artifacts
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary & Log files
+*.log
+.tmp/
+tmp/
+
+# Testing & Coverage
+coverage/
+.nyc_output/
