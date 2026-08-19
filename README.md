@@ -15,7 +15,7 @@ Adheres strictly to the [Agent Skills Open Specification](https://agentskills.io
 
 QRSPI enforces a strict phase-gated engineering process to eliminate hallucinations, prevent regressions, and enforce architectural integrity:
 
-1. **Question**: Eliminate scope ambiguity and challenge implicit assumptions.
+1. **Question**: Socratic stress-testing, failure-mode probing, and zero lazy questions (codebase pre-checked).
 2. **Research**: Discover codebase ground truth, dependencies, and blast radius before modifying files.
 3. **Structure**: Define architectural contracts, invariants, types, and trade-offs.
 4. **Plan**: Formulate an atomic step-by-step checklist with verifiable commands.
@@ -121,6 +121,7 @@ mi-proyecto/
 - [Everything We Got Wrong About Research-Plan-Implement](https://www.youtube.com/watch?v=YwZR6tc7qYg) by [Dexter Horthy](https://github.com/dexhorthy)
 - [From RPI to QRSPI: Rebuilding the First Structured Workflow for Coding Agents](https://alexlavaee.me/blog/from-rpi-to-qrspi/) by [Alex Lavaee](https://github.com/lavaman131)
 - [Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents) by [HumanLayer](https://www.humanlayer.dev/)
+- [grill-me: Relentless Interviewing Skill for Coding Agents](https://skills.sh/mattpocock/skills/grill-me) by [Matt Pocock](https://github.com/mattpocock)
 
 ---
 
