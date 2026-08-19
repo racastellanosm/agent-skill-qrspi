@@ -1,7 +1,7 @@
 ---
 name: qrspi-methodology
 description: Enforces the QRSPI (Question, Research, Structure, Plan, Implement) engineering methodology. Triggers whenever starting complex features, architectural refactors, multi-file bug investigations, system migrations, or new implementations to ensure zero hallucinations and deterministic software delivery.
-version: 1.1.0
+version: 1.2.0
 author: Platform Engineering
 license: MIT
 compatibility:
@@ -55,7 +55,7 @@ Eliminate requirements ambiguity, challenge implicit assumptions, stress-test de
    - **Backward Compatibility & Migrations**: Breaking API contracts, legacy schema conversions.
    - **Boundary Conditions & Limits**: Empty collections, null states, extreme payload sizes.
 4. **Walk Decision Trees Branch-by-Branch**: When multiple architectural paths exist, present the decision tree and validate trade-offs interactively with the user (`ask_question` / prompt).
-5. **Persist Stage 1**: Write `.qrspi/sessions/YYYY-MM-DD_<feature-slug>/1-question.md`.
+5. **Persist Stage 1**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/1-question.md`.
 
 ### Hard Gate
 > **Checkpoint:** Proceed to Phase 2 only when the problem statement, acceptance criteria, and failure mode mitigations are 100% deterministic and mutually agreed upon.
@@ -71,7 +71,7 @@ Establish ground-truth facts about the current state of the codebase, dependenci
 1. **Locate Existing Patterns**: Use ripgrep (`grep_search`), file finders (`find_by_name`), and AST/symbol tools to discover how similar features are implemented.
 2. **Trace Data & Control Flow**: Read relevant source files end-to-end (`view_file`), mapping input entry points, transformers, and output boundaries.
 3. **Verify Dependencies & Toolchains**: Inspect lockfiles, build configurations (`package.json`, `Cargo.toml`, `go.mod`, `pyproject.toml`), and runtime versions.
-4. **Persist Stage 2**: Write `.qrspi/sessions/YYYY-MM-DD_<feature-slug>/2-research.md`.
+4. **Persist Stage 2**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/2-research.md`.
 
 ### Hard Gate
 > **Checkpoint:** Proceed to Phase 3 only with verifiable line-number references, interface definitions, and dependency confirmations documented.
@@ -87,7 +87,7 @@ Formulate the architectural blueprint, data structures, invariants, and interfac
 1. **Define Core Abstractions**: Model data contracts, types, schema updates, and public API boundaries.
 2. **Evaluate Trade-offs**: Contrast 2+ technical approaches (e.g., performance vs. complexity, sync vs. async) and justify the chosen path.
 3. **Map Error Handling & Invariants**: Enumerate error states, fallback behaviors, concurrency locks, and idempotency guarantees.
-4. **Persist Stage 3 & Register ADR**: Write `.qrspi/sessions/YYYY-MM-DD_<feature-slug>/3-structure.md` and append the record to `.qrspi/INDEX.md`.
+4. **Persist Stage 3 & Register ADR**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/3-structure.md` and append the record to `.qrspi/INDEX.md`.
 
 ### Hard Gate
 > **Checkpoint:** Proceed to Phase 4 only after the system design satisfies all Phase 1 requirements and Phase 2 codebase constraints.
@@ -103,7 +103,7 @@ Construct a deterministic, step-by-step checklist where each action has a corres
 1. **Break Down Tasks Atomically**: Each step must represent a single logical change (e.g., 1 type definition, 1 test suite, 1 module update).
 2. **Define Test Strategy**: Formulate unit tests, integration tests, or end-to-end verification commands for each step.
 3. **Establish Rollback/Checkpoints**: Ensure each phase leaves the repository in a compilable/testable state.
-4. **Persist Stage 4**: Write `.qrspi/sessions/YYYY-MM-DD_<feature-slug>/4-plan.md`.
+4. **Persist Stage 4**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/4-plan.md`.
 
 ### Hard Gate
 > **Checkpoint:** `4-plan.md` must be instantiated and confirmed prior to modifying source code.
@@ -119,7 +119,7 @@ Execute the plan with zero regressions, strict test coverage, and continuous val
 1. **Atomic Code Changes**: Follow the checklist sequentially using targeted edit tools (`replace_file_content` / `write_to_file`). Avoid sweeping unstaged rewrites.
 2. **Preserve Code Quality & Style**: Strictly match existing idioms, linter rules, typing standards, and comments/docstrings.
 3. **Execute Automated Verification**: Run compilers, linters, and test suites after every logical step (`rtk` or native test runner).
-4. **Persist Stage 5 & Update ADR**: Write `.qrspi/sessions/YYYY-MM-DD_<feature-slug>/5-implement.md` and update status in `.qrspi/INDEX.md`.
+4. **Persist Stage 5 & Update ADR**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/5-implement.md` and update status in `.qrspi/INDEX.md`.
 5. **Final Regression Sweep**: Verify edge cases, error conditions, and user acceptance criteria against `1-question.md`.
 
 ---
@@ -132,7 +132,7 @@ To prevent oversized documents, maintain token-efficient context, and enable fri
 .qrspi/
 ├── INDEX.md                                    # Master Registry & Living ADR
 └── sessions/
-    └── YYYY-MM-DD_<feature-slug>/             # Dedicated session directory per feature
+    └── YYYY-MM-DD-<feature-slug>/             # Dedicated session directory per feature
         ├── 1-question.md                      # Scope, requirements & acceptance criteria
         ├── 2-research.md                      # Codebase ground truth, paths & blast radius
         ├── 3-structure.md                     # Contracts, schema updates & architecture decisions

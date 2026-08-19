@@ -8,8 +8,8 @@ This document is the centralized registry of all features, refactors, and archit
 
 | Date | Feature / Ticket | Session Path | Status | Key Architectural Decision | Handoff |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `YYYY-MM-DD` | `auth-v2-migration` | [`sessions/YYYY-MM-DD_auth-v2-migration/`](sessions/YYYY-MM-DD_auth-v2-migration/) | `COMPLETED` | Migrated from JWT to session-tokens with Redis cache | `@dev-lead` |
-| `YYYY-MM-DD` | `payments-webhook` | [`sessions/YYYY-MM-DD_payments-webhook/`](sessions/YYYY-MM-DD_payments-webhook/) | `IN_PROGRESS` | Added idempotency keys in Postgres | `@backend-team` |
+| `YYYY-MM-DD` | `auth-v2-migration` | [`sessions/YYYY-MM-DD-auth-v2-migration/`](sessions/YYYY-MM-DD-auth-v2-migration/) | `COMPLETED` | Migrated from JWT to session-tokens with Redis cache | `@dev-lead` |
+| `YYYY-MM-DD` | `payments-webhook` | [`sessions/YYYY-MM-DD-payments-webhook/`](sessions/YYYY-MM-DD-payments-webhook/) | `IN_PROGRESS` | Added idempotency keys in Postgres | `@backend-team` |
 
 ---
 
