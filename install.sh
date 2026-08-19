@@ -35,26 +35,26 @@ FORCE=0
 CUSTOM_DIR=""
 
 log_info() {
-  printf "${BLUE}[INFO]${RESET} %s\n" "$1"
+  printf "%b[INFO]%b %s\n" "$BLUE" "$RESET" "$1"
 }
 
 log_success() {
-  printf "${GREEN}[SUCCESS]${RESET} %s\n" "$1"
+  printf "%b[SUCCESS]%b %s\n" "$GREEN" "$RESET" "$1"
 }
 
 log_warn() {
-  printf "${YELLOW}[WARN]${RESET} %s\n" "$1"
+  printf "%b[WARN]%b %s\n" "$YELLOW" "$RESET" "$1"
 }
 
 log_error() {
-  printf "${RED}[ERROR]${RESET} %s\n" "$1" >&2
+  printf "%b[ERROR]%b %s\n" "$RED" "$RESET" "$1" >&2
 }
 
 print_banner() {
-  printf "${BOLD}====================================================================${RESET}\n"
-  printf "${BOLD}         QRSPI Methodology - Agent Skill & Hook Installer           ${RESET}\n"
-  printf "${BOLD}   Standard: agentskills.io | Cross-Harness Interoperability        ${RESET}\n"
-  printf "${BOLD}====================================================================${RESET}\n\n"
+  printf "%b====================================================================%b\n" "$BOLD" "$RESET"
+  printf "%b         QRSPI Methodology - Agent Skill & Hook Installer           %b\n" "$BOLD" "$RESET"
+  printf "%b   Standard: agentskills.io | Cross-Harness Interoperability        %b\n" "$BOLD" "$RESET"
+  printf "%b====================================================================%b\n\n" "$BOLD" "$RESET"
 }
 
 usage() {
@@ -121,7 +121,7 @@ done
 # Interactive Scope Selection
 select_scope() {
   if [ -n "$SCOPE" ]; then return; fi
-  printf "${BOLD}Select Installation Scope:${RESET}\n"
+  printf "%bSelect Installation Scope:%b\n" "$BOLD" "$RESET"
   printf "  1) Global (Current User - \$HOME)\n"
   printf "  2) Local  (Current Workspace / Project Directory)\n"
   printf "Enter choice [1-2] (default: 1): "
@@ -136,7 +136,7 @@ select_scope() {
 # Interactive Harness Selection
 select_harness() {
   if [ -n "$HARNESS" ]; then return; fi
-  printf "${BOLD}Select Target AI Agent Harness:${RESET}\n"
+  printf "%bSelect Target AI Agent Harness:%b\n" "$BOLD" "$RESET"
   printf "  1) Google Gemini (CLI / Antigravity / Studio)\n"
   printf "  2) Anthropic Claude (Claude Code / Desktop)\n"
   printf "  3) OpenAI Codex / CLI\n"
@@ -319,7 +319,7 @@ main() {
 
   printf "\n"
   log_success "QRSPI Skill & Agent Hooks installation complete!"
-  printf "${BOLD}Verification Hint:${RESET} Start a prompt with 'Refactor module X' to verify automatic QRSPI hook trigger.\n\n"
+  printf "%bVerification Hint:%b Start a prompt with 'Refactor module X' to verify automatic QRSPI hook trigger.\n\n" "$BOLD" "$RESET"
 }
 
 main

@@ -26,6 +26,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y shellcheck
           shellcheck install.sh
           shellcheck scripts/verify-session.sh
+          shellcheck hooks/prompt-hook.sh
 
       - name: Test Installation Script (Dry Run & Multi-Harness)
         run: |
