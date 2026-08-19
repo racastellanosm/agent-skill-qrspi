@@ -14,7 +14,6 @@ TRIGGERS="refactor|implement|migrate|redesign|fix.*bug|architecture|feature|buil
 if echo "$PROMPT_INPUT" | grep -Eiq "$TRIGGERS"; then
   ACTIVE_STAGE="1 (Question)"
   MODEL_WEIGHT="MEDIUM (Standard Reasoning)"
-  MODELS="Gemini 3.7 Flash / Claude 3.7 Sonnet / GPT-4o"
   STAGE_GOAL="Deconstruct requirements, perform codebase pre-check, and stress-test failure vectors."
 
   # Detect active session directory under .qrspi/sessions/
@@ -31,27 +30,22 @@ if echo "$PROMPT_INPUT" | grep -Eiq "$TRIGGERS"; then
       if [ ! -f "$LATEST_SESSION/1-question.md" ]; then
         ACTIVE_STAGE="1 (Question)"
         MODEL_WEIGHT="MEDIUM (Standard Reasoning)"
-        MODELS="Gemini 3.7 Flash / Claude 3.7 Sonnet / GPT-4o"
         STAGE_GOAL="Clarify ambiguities, zero lazy questions, and failure mode analysis."
       elif [ ! -f "$LATEST_SESSION/2-research.md" ]; then
         ACTIVE_STAGE="2 (Research)"
         MODEL_WEIGHT="HIGH (Deep Reasoning / Extended Thinking)"
-        MODELS="Gemini 3.1 Pro / Claude 3.7 Sonnet-Thinking / o3-mini"
         STAGE_GOAL="Verify codebase ground truth, AST structures, dependencies, and blast radius."
       elif [ ! -f "$LATEST_SESSION/3-structure.md" ]; then
         ACTIVE_STAGE="3 (Structure)"
         MODEL_WEIGHT="HIGH (Deep Reasoning / Extended Thinking)"
-        MODELS="Gemini 3.1 Pro / Claude 3.7 Sonnet-Thinking / o1"
         STAGE_GOAL="Define data contracts, types, architectural invariants, and trade-offs."
       elif [ ! -f "$LATEST_SESSION/4-plan.md" ]; then
         ACTIVE_STAGE="4 (Plan)"
         MODEL_WEIGHT="HIGH (Deep Reasoning / Extended Thinking)"
-        MODELS="Gemini 3.1 Pro / Claude 3.7 Sonnet-Thinking"
         STAGE_GOAL="Construct atomic step-by-step checklist with test/verification commands."
       else
         ACTIVE_STAGE="5 (Implement)"
         MODEL_WEIGHT="LOW / FAST (Atomic Code Execution)"
-        MODELS="Gemini 3.7 Flash / Claude 3.5 Haiku / GPT-4o-mini"
         STAGE_GOAL="Execute checklist sequentially with test verification and zero regressions."
       fi
     fi
@@ -62,8 +56,7 @@ if echo "$PROMPT_INPUT" | grep -Eiq "$TRIGGERS"; then
 --------------------------------------------------------------------------------
 💡 COGNITIVE LOAD & MODEL WEIGHT GUARDRAIL:
 • Active Target Phase : Phase ${ACTIVE_STAGE}
-• Recommended Model   : ${MODEL_WEIGHT}
-• Target LLMs         : ${MODELS}
+• Recommended Weight  : ${MODEL_WEIGHT}
 • Primary Objective   : ${STAGE_GOAL}
 --------------------------------------------------------------------------------
 You MUST follow the 5-phase QRSPI engineering standard:
@@ -71,7 +64,7 @@ You MUST follow the 5-phase QRSPI engineering standard:
 
 Rules:
 - If delegating via subagents (invoke_subagent): Use Model="pro" for Phases 2-4, Model="flash" for Phase 5.
-- If in interactive mode: Remind the user if a model switch improves reasoning or saves tokens.
+- If in interactive mode: Remind the user if a model weight switch improves reasoning or saves tokens.
 - Do NOT jump to writing code before completing and persisting Phases 1 through 4.
 EOF
 fi
