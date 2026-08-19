@@ -143,15 +143,15 @@ select_harness() {
   printf "  4) OpenCode\n"
   printf "  5) Standard agentskills.io root (.agents/skills)\n"
   printf "  6) All Harnesses\n"
-  printf "Enter choice [1-6] (default: 6): "
+  printf "Enter choice [1-6] (default: 1): "
   read -r harness_choice
   case "$harness_choice" in
-    1) HARNESS="gemini" ;;
     2) HARNESS="claude" ;;
     3) HARNESS="codex" ;;
     4) HARNESS="opencode" ;;
     5) HARNESS="standard" ;;
-    *) HARNESS="all" ;;
+    6) HARNESS="all" ;;
+    *) HARNESS="gemini" ;;
   esac
   printf "\n"
 }
@@ -219,7 +219,7 @@ EOF
         fi
       fi
       ;;
-    gemini|standard|all)
+    gemini)
       hook_dir="${base_prefix}/.gemini/hooks"
       mkdir -p "$hook_dir"
       if [ -f "${SOURCE_DIR}/hooks/prompt-hook.sh" ]; then
@@ -249,28 +249,41 @@ EOF
 EOF
           log_info "Generated Antigravity/Gemini Hook Configuration: ${hooks_config}"
         fi
+      fi
+      ;;
+    standard)
+      hook_dir="${base_prefix}/.agents/hooks"
+      mkdir -p "$hook_dir"
+      if [ -f "${SOURCE_DIR}/hooks/prompt-hook.sh" ]; then
+        cp "${SOURCE_DIR}/hooks/prompt-hook.sh" "${hook_dir}/qrspi-prompt-hook.sh"
+        chmod 755 "${hook_dir}/qrspi-prompt-hook.sh"
+        log_info "Installed Standard Agents Hook: ${hook_dir}/qrspi-prompt-hook.sh"
 
-        # Also support .agents/hooks.json for standard root workspace
+        hook_cmd="${hook_dir}/qrspi-prompt-hook.sh"
         if [ "$target_scope" = "local" ]; then
-          agents_hooks="./.agents/hooks.json"
-          mkdir -p ./.agents
-          if [ ! -f "$agents_hooks" ]; then
-            cat <<EOF > "$agents_hooks"
+          hook_cmd="./.agents/hooks/qrspi-prompt-hook.sh"
+        fi
+
+        hooks_config="${base_prefix}/.agents/hooks.json"
+        if [ ! -f "$hooks_config" ]; then
+          cat <<EOF > "$hooks_config"
 {
   "qrspi-prompt-guardrail": {
     "PreInvocation": [
       {
         "type": "command",
-        "command": "./.gemini/hooks/qrspi-prompt-hook.sh"
+        "command": "${hook_cmd}"
       }
     ]
   }
 }
 EOF
-            log_info "Generated Standard Agents Hook Configuration: ${agents_hooks}"
-          fi
+          log_info "Generated Standard Agents Hook Configuration: ${hooks_config}"
         fi
       fi
+      ;;
+    *)
+      # No dedicated lifecycle hooks configured for codex / opencode
       ;;
   esac
 }

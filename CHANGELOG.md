@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.1] - 2026-08-19
+
+### Fixed
+- **Strict Harness Isolation**: `install.sh` now enforces complete directory and hook isolation per target harness (e.g. `--harness=gemini` exclusively generates `.gemini/`, `--harness=standard` generates `.agents/`), preventing inadvertent creation of extraneous directories.
+- **Interactive Default Update**: Updated interactive installer prompt default to option `1` (Google Gemini) for safer, single-harness installations.
+
 ## [1.8.0] - 2026-08-19
 
 ### Added
