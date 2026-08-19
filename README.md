@@ -95,24 +95,24 @@ Copy the directory contents to your target harness path:
 To eliminate gigantic monolithic documents and optimize token usage, each feature session is organized into a modular folder with 1 Markdown document per QRSPI stage:
 
 ```
-mi-proyecto/
+my-project/
 └── .qrspi/
-    ├── INDEX.md                                    # Registro maestro y ADR vivo
+    ├── INDEX.md                                    # Master registry & living ADR
     └── sessions/
-        └── 2026-08-19_auth-v2-migration/          # Carpeta dedicada por feature
-            ├── 1-question.md                      # Alcance, requisitos (FR/NFR) y criterios
-            ├── 2-research.md                      # Mapeo de codebase, dependencias y blast radius
-            ├── 3-structure.md                     # Contratos, tipos y decisiones de arquitectura
-            ├── 4-plan.md                          # Checklist atómico con comandos de verificación
-            └── 5-implement.md                     # Log de ejecución, tests y sign-off final
+        └── 2026-08-19_auth-v2-migration/          # Dedicated feature session directory
+            ├── 1-question.md                      # Scope, requirements (FR/NFR), and acceptance criteria
+            ├── 2-research.md                      # Codebase discoveries, dependencies, and blast radius
+            ├── 3-structure.md                     # Contracts, types, and architectural decisions
+            ├── 4-plan.md                          # Atomic step-by-step checklist with test commands
+            └── 5-implement.md                     # Step execution log, test results, and final sign-off
 ```
 
-### ⚡ Ventajas de la Arquitectura Modular:
-1. **Ahorro de hasta un 80% en Tokens:** Un subagente en la fase de implementación solo necesita cargar `3-structure.md` y `4-plan.md` en su contexto, en lugar de arrastrar todo el historial verbose de investigación.
-2. **Revisión Humana Eficiente:** 
-   - En *Design Review*, los arquitectos revisan únicamente `3-structure.md`.
-   - En *Pull Request Review*, el equipo revisa `5-implement.md` para verificar los resultados de pruebas.
-3. **Living ADR (`.qrspi/INDEX.md`):** Mantiene el índice centralizado de decisiones y enlaza directamente a la carpeta de la feature correspondiente.
+### ⚡ Advantages of the Modular Architecture:
+1. **Up to 80% Token Savings:** An implementation subagent only loads `3-structure.md` and `4-plan.md` into context, rather than carrying the entire verbose research history.
+2. **Efficient Human Review:** 
+   - **Design Review:** Architects and tech leads only review `3-structure.md`.
+   - **Pull Request Review:** The team reviews `5-implement.md` to verify test execution and linter output.
+3. **Living ADR (`.qrspi/INDEX.md`):** Maintains the centralized index of architectural decisions with direct relative links to each feature folder.
 
 ---
 
