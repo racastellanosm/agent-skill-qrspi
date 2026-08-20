@@ -99,15 +99,14 @@ To eliminate gigantic monolithic documents and optimize token usage, each featur
 
 ```
 my-project/
-└── .qrspi/
+└── .qrspi/                                         # Configurable root (.qrspi/, .docs/, .implementations/, .sessions/)
     ├── INDEX.md                                    # Master registry & living ADR
-    └── sessions/
-        └── 2026-08-19-auth-v2-migration/          # Dedicated feature session directory
-            ├── 1-question.md                      # Scope, requirements (FR/NFR), and acceptance criteria
-            ├── 2-research.md                      # Codebase discoveries, dependencies, and blast radius
-            ├── 3-structure.md                     # Contracts, types, and architectural decisions
-            ├── 4-plan.md                          # Atomic step-by-step checklist with test commands
-            └── 5-implement.md                     # Step execution log, test results, and final sign-off
+    └── 2026-08-19-auth-v2-migration/               # Dedicated feature session directory directly under root
+        ├── 1-question.md                           # Scope, requirements (FR/NFR), and acceptance criteria
+        ├── 2-research.md                           # Codebase discoveries, dependencies, and blast radius
+        ├── 3-structure.md                          # Contracts, types, and architectural decisions
+        ├── 4-plan.md                               # Atomic step-by-step checklist with test commands
+        └── 5-implement.md                          # Step execution log, test results, and final sign-off
 ```
 
 ### ⚡ Advantages of the Modular Architecture:

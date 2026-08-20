@@ -16,25 +16,22 @@ ACTIVE_STAGE="1 (Question)"
 MODEL_WEIGHT="MEDIUM (Standard Reasoning)"
 STAGE_GOAL="Deconstruct requirements, perform codebase pre-check, and stress-test failure vectors."
 
-# Detect active session directory across supported roots (.qrspi, .sessions, .implementations, .docs)
-SESSION_ROOT=""
-for candidate in ".qrspi/sessions" ".sessions/sessions" ".sessions" ".implementations/sessions" ".implementations" ".docs/sessions" ".docs/qrspi/sessions" ".docs"; do
-  if [ -d "$candidate" ]; then
-    SESSION_ROOT="$candidate"
-    break
+# Detect active session directory across supported candidate roots
+LATEST_SESSION=""
+for root in ".qrspi" ".docs" ".implementations" ".sessions" ".qrspi/sessions"; do
+  if [ -d "$root" ]; then
+    for dir in "$root"/*; do
+      if [ -d "$dir" ] && [ -f "$dir/1-question.md" ] || [ -f "$dir/2-research.md" ] || [ -f "$dir/3-structure.md" ] || [ -f "$dir/4-plan.md" ] || [ -f "$dir/5-implement.md" ]; then
+        LATEST_SESSION="$dir"
+      fi
+    done
+    if [ -n "$LATEST_SESSION" ]; then
+      break
+    fi
   fi
 done
 
-if [ -n "$SESSION_ROOT" ] && [ -d "$SESSION_ROOT" ]; then
-  # Find latest session directory in POSIX-compliant manner
-  LATEST_SESSION=""
-  for dir in "$SESSION_ROOT"/*; do
-    if [ -d "$dir" ]; then
-      LATEST_SESSION="$dir"
-    fi
-  done
-
-  if [ -n "$LATEST_SESSION" ] && [ -d "$LATEST_SESSION" ]; then
+if [ -n "$LATEST_SESSION" ] && [ -d "$LATEST_SESSION" ]; then
     if [ ! -f "$LATEST_SESSION/1-question.md" ]; then
       ACTIVE_STAGE="1 (Question)"
       MODEL_WEIGHT="MEDIUM (Standard Reasoning)"

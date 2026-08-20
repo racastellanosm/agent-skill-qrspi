@@ -53,18 +53,18 @@ Do **NOT** trigger the 5-phase QRSPI workflow for:
 
 ## Session Directory Configuration
 
-By default, QRSPI persists session records under **`.qrspi/`**:
-- Master ADR registry: `.qrspi/INDEX.md`
-- Active session files: `.qrspi/sessions/YYYY-MM-DD-<slug>/1-question.md` through `5-implement.md`
+By default, QRSPI persists session records directly under **`.qrspi/`**:
+- Master ADR registry: `<session-root>/INDEX.md`
+- Active session files: `<session-root>/YYYY-MM-DD-<slug>/1-question.md` through `5-implement.md`
 
 ### Customizing Session Destination:
 The user can customize the session root in their workspace's [`AGENTS.md`](file:///Users/rcastellanosm/Documents/projects/github/personal/agent-skills/qrspi-agent-skill/AGENTS.md) or via prompt preference. The supported alternative roots are:
-- **`.qrspi/`** *(Default)*
-- **`.docs/`** (e.g. `.docs/sessions/YYYY-MM-DD-<slug>/`)
-- **`.implementations/`** (e.g. `.implementations/sessions/YYYY-MM-DD-<slug>/`)
+- **`.qrspi/`** *(Default, e.g. `.qrspi/YYYY-MM-DD-<slug>/`)*
+- **`.docs/`** (e.g. `.docs/YYYY-MM-DD-<slug>/`)
+- **`.implementations/`** (e.g. `.implementations/YYYY-MM-DD-<slug>/`)
 - **`.sessions/`** (e.g. `.sessions/YYYY-MM-DD-<slug>/`)
 
-When a custom session directory is specified in `AGENTS.md`, the agent **MUST** use that path for all phase persistence and ADR index updates.
+> **Note:** Feature session folders are placed directly inside the selected root directory without any intermediate nested folders. When a custom session directory is specified in `AGENTS.md`, the agent **MUST** use that path for all phase persistence and ADR index updates.
 
 ---
 
@@ -82,7 +82,7 @@ Eliminate requirements ambiguity, challenge implicit assumptions, stress-test de
    - **Backward Compatibility & Migrations**: Breaking API contracts, legacy schema conversions.
    - **Boundary Conditions & Limits**: Empty collections, null states, extreme payload sizes.
 4. **Walk Decision Trees Branch-by-Branch**: When multiple architectural paths exist, present the decision tree and validate trade-offs interactively with the user (`ask_question` / prompt).
-5. **Persist Stage 1**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/1-question.md`.
+5. **Persist Stage 1**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/1-question.md` (default: `.qrspi/YYYY-MM-DD-<feature-slug>/1-question.md`).
 
 ### Hard Gate
 > **Checkpoint:** Proceed to Phase 2 only when the problem statement, acceptance criteria, and failure mode mitigations are 100% deterministic and mutually agreed upon.
@@ -98,7 +98,7 @@ Establish ground-truth facts about the current state of the codebase, dependenci
 1. **Locate Existing Patterns**: Use ripgrep (`grep_search`), file finders (`find_by_name`), and AST/symbol tools to discover how similar features are implemented.
 2. **Trace Data & Control Flow**: Read relevant source files end-to-end (`view_file`), mapping input entry points, transformers, and output boundaries.
 3. **Verify Dependencies & Toolchains**: Inspect lockfiles, build configurations (`package.json`, `Cargo.toml`, `go.mod`, `pyproject.toml`), and runtime versions.
-4. **Persist Stage 2**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/2-research.md`.
+4. **Persist Stage 2**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/2-research.md`.
 
 ### Hard Gate
 > **Checkpoint:** Proceed to Phase 3 only with verifiable line-number references, interface definitions, and dependency confirmations documented.
@@ -114,7 +114,7 @@ Formulate the architectural blueprint, data structures, invariants, and interfac
 1. **Define Core Abstractions**: Model data contracts, types, schema updates, and public API boundaries.
 2. **Evaluate Trade-offs**: Contrast 2+ technical approaches (e.g., performance vs. complexity, sync vs. async) and justify the chosen path.
 3. **Map Error Handling & Invariants**: Enumerate error states, fallback behaviors, concurrency locks, and idempotency guarantees.
-4. **Persist Stage 3 & Register ADR**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/3-structure.md` and append the record to `.qrspi/INDEX.md`.
+4. **Persist Stage 3 & Register ADR**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/3-structure.md` and append the record to `<session-root>/INDEX.md`.
 
 ### Hard Gate
 > **Checkpoint:** Proceed to Phase 4 only after the system design satisfies all Phase 1 requirements and Phase 2 codebase constraints.
@@ -130,7 +130,7 @@ Construct a deterministic, step-by-step checklist where each action has a corres
 1. **Break Down Tasks Atomically**: Each step must represent a single logical change (e.g., 1 type definition, 1 test suite, 1 module update).
 2. **Define Test Strategy**: Formulate unit tests, integration tests, or end-to-end verification commands for each step.
 3. **Establish Rollback/Checkpoints**: Ensure each phase leaves the repository in a compilable/testable state.
-4. **Persist Stage 4**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/4-plan.md`.
+4. **Persist Stage 4**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/4-plan.md`.
 
 ### Hard Gate
 > **Checkpoint:** `4-plan.md` must be instantiated and confirmed prior to modifying source code.
@@ -146,7 +146,7 @@ Execute the plan with zero regressions, strict test coverage, and continuous val
 1. **Atomic Code Changes**: Follow the checklist sequentially using targeted edit tools (`replace_file_content` / `write_to_file`). Avoid sweeping unstaged rewrites.
 2. **Preserve Code Quality & Style**: Strictly match existing idioms, linter rules, typing standards, and comments/docstrings.
 3. **Execute Automated Verification**: Run compilers, linters, and test suites after every logical step (`rtk` or native test runner).
-4. **Persist Stage 5 & Update ADR**: Write `.qrspi/sessions/YYYY-MM-DD-<feature-slug>/5-implement.md` and update status in `.qrspi/INDEX.md`.
+4. **Persist Stage 5 & Update ADR**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/5-implement.md` and update status in `<session-root>/INDEX.md`.
 5. **Final Regression Sweep**: Verify edge cases, error conditions, and user acceptance criteria against `1-question.md`.
 
 ---
@@ -156,15 +156,14 @@ Execute the plan with zero regressions, strict test coverage, and continuous val
 To prevent oversized documents, maintain token-efficient context, and enable frictionless team and cross-agent handoffs:
 
 ```
-.qrspi/
+<session-root>/ (e.g. .qrspi/, .docs/, .implementations/, .sessions/)
 ├── INDEX.md                                    # Master Registry & Living ADR
-└── sessions/
-    └── YYYY-MM-DD-<feature-slug>/             # Dedicated session directory per feature
-        ├── 1-question.md                      # Scope, requirements & acceptance criteria
-        ├── 2-research.md                      # Codebase ground truth, paths & blast radius
-        ├── 3-structure.md                     # Contracts, schema updates & architecture decisions
-        ├── 4-plan.md                          # Step-by-step checklist with verification commands
-        └── 5-implement.md                     # Execution log, test results & handoff sign-off
+└── YYYY-MM-DD-<feature-slug>/                  # Dedicated session directory per feature
+    ├── 1-question.md                           # Scope, requirements & acceptance criteria
+    ├── 2-research.md                           # Codebase ground truth, paths & blast radius
+    ├── 3-structure.md                          # Contracts, schema updates & architecture decisions
+    ├── 4-plan.md                               # Step-by-step checklist with verification commands
+    └── 5-implement.md                          # Execution log, test results & handoff sign-off
 ```
 
 ### Handoff Mechanics:
