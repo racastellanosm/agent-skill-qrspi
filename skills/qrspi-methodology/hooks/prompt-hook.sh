@@ -6,15 +6,10 @@
 # Standard: agentskills.io Open Specification
 # ==============================================================================
 
-# Read stdin if available (non-blocking / fast)
+# Read stdin to detect environment format (JSON PreInvocation vs CLI)
 STDIN_DATA=""
 if [ ! -t 0 ]; then
   STDIN_DATA="$(cat)"
-fi
-
-PROMPT_INPUT="$1"
-if [ -z "$PROMPT_INPUT" ] && [ -n "$STDIN_DATA" ]; then
-  PROMPT_INPUT="$STDIN_DATA"
 fi
 
 ACTIVE_STAGE="1 (Question)"
