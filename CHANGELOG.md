@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2026-08-20
+
+### Added
+- **Configurable Session Destination**: Added native support for configurable session roots (`.qrspi/`, `.docs/`, `.implementations/`, `.sessions/`) defined via project `AGENTS.md` or user preference, with dynamic multi-root discovery in `prompt-hook.sh`.
+- **Explicit Anti-Triggers**: Defined clear operational boundaries in `SKILL.md` (when NOT to trigger full QRSPI workflow: 1-2 line typo edits, read-only queries, git releases, scratch tasks).
+
+### Security
+- **GitHub Actions Pinning**: Pinned all GitHub Actions across CI workflows to immutable commit SHAs for supply chain zero-trust assurance.
+
 ## [1.9.3] - 2026-08-20
 
 ### Security & Hardening
