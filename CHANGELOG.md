@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-08-20
+
+### Changed
+- **Canonical `skills/<skill-name>/` Architecture**: Migrated repository layout to the canonical standard (`skills/qrspi-methodology/`) containing `SKILL.md`, `references/`, `scripts/`, and `hooks/`.
+- **Pure `npx skills add` Packaging**: Installing via `skills.sh` / `npx skills add` now packages and copies exclusively the skill directory, completely eliminating unwanted root repository files (`.github`, `AGENTS.md`, `README.md`, etc.).
+- **Updated Tooling & CI/CD**: Updated `install.sh`, `.github/workflows/ci.yml`, `scripts/verify-security.sh`, and documentation to transparently support the new structure.
+
 ## [1.8.2] - 2026-08-20
 
 ### Changed
