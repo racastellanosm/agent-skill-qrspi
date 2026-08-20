@@ -21,7 +21,7 @@ LATEST_SESSION=""
 for root in ".qrspi" ".docs" ".implementations" ".sessions" ".qrspi/sessions"; do
   if [ -d "$root" ]; then
     for dir in "$root"/*; do
-      if [ -d "$dir" ] && [ -f "$dir/1-question.md" ] || [ -f "$dir/2-research.md" ] || [ -f "$dir/3-structure.md" ] || [ -f "$dir/4-plan.md" ] || [ -f "$dir/5-implement.md" ]; then
+      if [ -d "$dir" ] && { [ -f "$dir/1-question.md" ] || [ -f "$dir/2-research.md" ] || [ -f "$dir/3-structure.md" ] || [ -f "$dir/4-plan.md" ] || [ -f "$dir/5-implement.md" ]; }; then
         LATEST_SESSION="$dir"
       fi
     done
@@ -32,27 +32,26 @@ for root in ".qrspi" ".docs" ".implementations" ".sessions" ".qrspi/sessions"; d
 done
 
 if [ -n "$LATEST_SESSION" ] && [ -d "$LATEST_SESSION" ]; then
-    if [ ! -f "$LATEST_SESSION/1-question.md" ]; then
-      ACTIVE_STAGE="1 (Question)"
-      MODEL_WEIGHT="MEDIUM (Standard Reasoning)"
-      STAGE_GOAL="Clarify ambiguities, zero lazy questions, and failure mode analysis."
-    elif [ ! -f "$LATEST_SESSION/2-research.md" ]; then
-      ACTIVE_STAGE="2 (Research)"
-      MODEL_WEIGHT="HIGH (Deep Reasoning / Extended Thinking)"
-      STAGE_GOAL="Verify codebase ground truth, AST structures, dependencies, and blast radius."
-    elif [ ! -f "$LATEST_SESSION/3-structure.md" ]; then
-      ACTIVE_STAGE="3 (Structure)"
-      MODEL_WEIGHT="HIGH (Deep Reasoning / Extended Thinking)"
-      STAGE_GOAL="Define data contracts, types, architectural invariants, and trade-offs."
-    elif [ ! -f "$LATEST_SESSION/4-plan.md" ]; then
-      ACTIVE_STAGE="4 (Plan)"
-      MODEL_WEIGHT="HIGH (Deep Reasoning / Extended Thinking)"
-      STAGE_GOAL="Construct atomic step-by-step checklist with test/verification commands."
-    else
-      ACTIVE_STAGE="5 (Implement)"
-      MODEL_WEIGHT="LOW / FAST (Atomic Code Execution)"
-      STAGE_GOAL="Execute checklist sequentially with test verification and zero regressions."
-    fi
+  if [ ! -f "$LATEST_SESSION/1-question.md" ]; then
+    ACTIVE_STAGE="1 (Question)"
+    MODEL_WEIGHT="MEDIUM (Standard Reasoning)"
+    STAGE_GOAL="Clarify ambiguities, zero lazy questions, and failure mode analysis."
+  elif [ ! -f "$LATEST_SESSION/2-research.md" ]; then
+    ACTIVE_STAGE="2 (Research)"
+    MODEL_WEIGHT="HIGH (Deep Reasoning / Extended Thinking)"
+    STAGE_GOAL="Verify codebase ground truth, AST structures, dependencies, and blast radius."
+  elif [ ! -f "$LATEST_SESSION/3-structure.md" ]; then
+    ACTIVE_STAGE="3 (Structure)"
+    MODEL_WEIGHT="HIGH (Deep Reasoning / Extended Thinking)"
+    STAGE_GOAL="Define data contracts, types, architectural invariants, and trade-offs."
+  elif [ ! -f "$LATEST_SESSION/4-plan.md" ]; then
+    ACTIVE_STAGE="4 (Plan)"
+    MODEL_WEIGHT="HIGH (Deep Reasoning / Extended Thinking)"
+    STAGE_GOAL="Construct atomic step-by-step checklist with test/verification commands."
+  else
+    ACTIVE_STAGE="5 (Implement)"
+    MODEL_WEIGHT="LOW / FAST (Atomic Code Execution)"
+    STAGE_GOAL="Execute checklist sequentially with test verification and zero regressions."
   fi
 fi
 
