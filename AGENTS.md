@@ -5,7 +5,7 @@
 **Audience:** AI agents and platform engineers contributing to or maintaining this skill.  
 **Standard:** [agentskills.io Open Specification](https://agentskills.io/specification)  
 **Documentation & Code Language:** English (all code, templates, scripts, and documentation).  
-**Version:** 1.9.1  
+**Version:** 1.9.2  
 
 ---
 
@@ -52,7 +52,8 @@ This repository is the canonical reference implementation and distribution packa
 ├── CHANGELOG.md                   # Version release notes following Keep a Changelog
 ├── install.sh                     # Interactive & non-interactive POSIX installer
 ├── LICENSE                        # MIT License
-└── README.md                      # Public documentation and skills.sh index metadata
+├── README.md                      # Public documentation and skills.sh index metadata
+└── skills.sh.json                 # skills.sh directory grouping & metadata configuration
 ```
 
 ---

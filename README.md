@@ -93,7 +93,8 @@ Copy the directory contents to your target harness path:
 ├── CHANGELOG.md              # Version history following Keep a Changelog
 ├── install.sh                # Zero-dependency POSIX installation script
 ├── LICENSE                   # MIT License
-└── README.md                 # Public documentation and discovery metadata
+├── README.md                 # Public documentation and discovery metadata
+└── skills.sh.json            # skills.sh directory grouping & metadata configuration
 ```
 
 ---
