@@ -28,7 +28,7 @@ QRSPI enforces a strict phase-gated engineering process to eliminate hallucinati
 ### 1. Via `skills.sh` / Vercel Labs CLI
 ```bash
 # Add directly to your project workspace
-npx skills add https://github.com/racastellanosm/agent-skill-qrspi
+npx skills add racastellanosm/agent-skill-qrspi
 
 # Or search via find-skills
 npx skills find qrspi
