@@ -20,6 +20,6 @@ jobs:
           fetch-depth: 0
 
       - name: Run Gitleaks Secret Detector
-        uses: gitleaks/gitleaks-action@298d57fa6770a04944b0292fe4a57cb769a19d28 # v2.3.8
+        uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
