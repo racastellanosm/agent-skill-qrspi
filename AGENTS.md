@@ -5,7 +5,7 @@
 **Audience:** AI agents and platform engineers contributing to or maintaining this skill.  
 **Standard:** [agentskills.io Open Specification](https://agentskills.io/specification)  
 **Documentation & Code Language:** English (all code, templates, scripts, and documentation).  
-**Version:** 1.8.2  
+**Version:** 1.9.0  
 
 ---
 
@@ -29,27 +29,29 @@ This repository is the canonical reference implementation and distribution packa
 │   │   ├── ci.yml                 # CI/CD: YAML spec validation, shellcheck & multi-harness tests
 │   │   └── security.yml           # Security: Gitleaks secret scanning & least-privilege audit
 │   └── CODEOWNERS                 # Mandatory owner approval rules for critical paths
-├── hooks/
-│   └── prompt-hook.sh             # Agent Lifecycle Hook (Claude Code / Gemini CLI)
-├── references/
-│   ├── stage-templates/           # Modular stage templates (1 file per QRSPI stage)
-│   │   ├── 1-question.md
-│   │   ├── 2-research.md
-│   │   ├── 3-structure.md
-│   │   ├── 4-plan.md
-│   │   └── 5-implement.md
-│   ├── index-template.md          # Template for .qrspi/INDEX.md (Living ADR)
-│   └── phases-checklist.md        # Compact phase-gate quality checklist
-├── scripts/
-│   ├── verify-security.sh         # POSIX security auditor (Trojan Source, malware, exfil)
-│   └── verify-session.sh          # POSIX validator for modular QRSPI session directories
+├── skills/
+│   └── qrspi-methodology/        # 📦 Canonical Agent Skill Package
+│       ├── SKILL.md               # Canonical Agent Skill definition (agentskills.io)
+│       ├── hooks/
+│       │   └── prompt-hook.sh     # Agent Lifecycle Hook (Claude Code / Gemini CLI)
+│       ├── references/
+│       │   ├── stage-templates/   # Modular stage templates (1 file per QRSPI stage)
+│       │   │   ├── 1-question.md
+│       │   │   ├── 2-research.md
+│       │   │   ├── 3-structure.md
+│       │   │   ├── 4-plan.md
+│       │   │   └── 5-implement.md
+│       │   ├── index-template.md  # Template for .qrspi/INDEX.md (Living ADR)
+│       │   └── phases-checklist.md # Compact phase-gate quality checklist
+│       └── scripts/
+│           ├── verify-security.sh # POSIX security auditor (Trojan Source, malware, exfil)
+│           └── verify-session.sh  # POSIX validator for modular QRSPI session directories
 ├── .gitignore                     # OS and editor ignore rules
 ├── AGENTS.md                      # Agent governance, harnessing, and release protocols
 ├── CHANGELOG.md                   # Version release notes following Keep a Changelog
 ├── install.sh                     # Interactive & non-interactive POSIX installer
 ├── LICENSE                        # MIT License
-├── README.md                      # Public documentation and skills.sh index metadata
-└── SKILL.md                       # Canonical Agent Skill definition (agentskills.io)
+└── README.md                      # Public documentation and skills.sh index metadata
 ```
 
 ---
@@ -73,7 +75,7 @@ The skill installer (`install.sh`) must maintain determinism and support both **
 - **Shellcheck Mandatory:** All `.sh` files must pass `shellcheck -s sh` with zero warnings.
 - **Strict File Permissions:**
   - Directories: `755` (`drwxr-xr-x`)
-  - Executables (`install.sh`, `scripts/*.sh`, `hooks/*.sh`): `755` (`-rwxr-xr-x`)
+  - Executables (`install.sh`, `skills/qrspi-methodology/scripts/*.sh`, `skills/qrspi-methodology/hooks/*.sh`): `755` (`-rwxr-xr-x`)
   - Documentation and templates (`SKILL.md`, `*.md`): `644` (`-rw-r--r--`)
 - **Deterministic Cleanliness:** `install.sh` must be idempotent and safely handle pre-existing directories without corrupting permissions.
 
@@ -85,10 +87,10 @@ Before proposing changes or creating releases, run the following verification su
 
 ```bash
 # 1. Validate session directory structure
-./scripts/verify-session.sh references/stage-templates
+./skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/references/stage-templates
 
 # 2. Run repository security & integrity audit (Trojan Source, anti-malware, URI checks)
-./scripts/verify-security.sh
+./skills/qrspi-methodology/scripts/verify-security.sh
 
 # 3. Test installation in local multi-harness mode (dry run / test)
 ./install.sh --local --harness=all --force
@@ -97,7 +99,7 @@ Before proposing changes or creating releases, run the following verification su
 rm -rf .agents .gemini .claude .codex .opencode
 
 # 5. Verify ShellCheck on all scripts
-shellcheck install.sh scripts/verify-session.sh scripts/verify-security.sh hooks/prompt-hook.sh
+shellcheck install.sh skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/scripts/verify-security.sh skills/qrspi-methodology/hooks/prompt-hook.sh
 ```
 
 ---

@@ -41,7 +41,7 @@ printf "%b====================================================================%b
 
 # 1. Shell Script Security & Anti-Malware Patterns
 log_info "1/3. Auditing production shell scripts for reverse shells, eval loops, and obfuscation..."
-AUDIT_TARGETS="install.sh hooks/prompt-hook.sh scripts/verify-session.sh"
+AUDIT_TARGETS="install.sh skills/qrspi-methodology/hooks/prompt-hook.sh skills/qrspi-methodology/scripts/verify-session.sh"
 
 for file in $AUDIT_TARGETS; do
   if [ -f "$file" ]; then
@@ -65,7 +65,7 @@ log_ok "Production shell scripts are clean of unauthorized network patterns and 
 
 # 2. Markdown & Link Scheme Integrity
 log_info "2/3. Auditing Markdown files for dangerous URI schemes and script tags..."
-MD_FILES="SKILL.md README.md AGENTS.md CHANGELOG.md $(find references -name "*.md" 2>/dev/null)"
+MD_FILES="SKILL.md skills/qrspi-methodology/SKILL.md README.md AGENTS.md CHANGELOG.md $(find . -name "*.md" ! -path "*/.*" 2>/dev/null)"
 
 for file in $MD_FILES; do
   if [ -f "$file" ]; then
@@ -95,14 +95,11 @@ bidi_chars = {
     "\u2066", "\u2067", "\u2068", "\u2069", "\u200E", "\u200F"
 }
 
-files_to_scan = [
-    "SKILL.md", "README.md", "AGENTS.md", "CHANGELOG.md",
-    "install.sh", "hooks/prompt-hook.sh", "scripts/verify-session.sh"
-]
-
-for root, _, files in os.walk("references"):
+files_to_scan = []
+for root, dirs, files in os.walk("."):
+    dirs[:] = [d for d in dirs if not d.startswith(".")]
     for f in files:
-        if f.endswith(".md"):
+        if f.endswith(".md") or f.endswith(".sh"):
             files_to_scan.append(os.path.join(root, f))
 
 found = False

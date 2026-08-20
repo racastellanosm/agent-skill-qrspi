@@ -9,8 +9,6 @@
 
 # Critical security, CI/CD workflows, and installers
 .github/workflows/*   @racastellanosm
-scripts/*             @racastellanosm
-hooks/*               @racastellanosm
+skills/*              @racastellanosm
 install.sh            @racastellanosm
-SKILL.md              @racastellanosm
 AGENTS.md             @racastellanosm

@@ -26,7 +26,11 @@ fi
 
 SKILL_NAME="qrspi-methodology"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SOURCE_DIR="${SCRIPT_DIR}"
+if [ -d "${SCRIPT_DIR}/skills/${SKILL_NAME}" ]; then
+  SOURCE_DIR="${SCRIPT_DIR}/skills/${SKILL_NAME}"
+else
+  SOURCE_DIR="${SCRIPT_DIR}"
+fi
 
 # Defaults
 SCOPE=""
@@ -367,13 +371,17 @@ main() {
 
     if command -v curl >/dev/null 2>&1 && command -v tar >/dev/null 2>&1; then
       curl -sSL https://github.com/racastellanosm/agent-skill-qrspi/archive/refs/heads/main.tar.gz | tar -xz -C "$TMP_SRC_DIR" --strip-components=1
-      SOURCE_DIR="$TMP_SRC_DIR"
     elif command -v git >/dev/null 2>&1; then
       git clone --depth=1 https://github.com/racastellanosm/agent-skill-qrspi.git "$TMP_SRC_DIR" >/dev/null 2>&1
-      SOURCE_DIR="$TMP_SRC_DIR"
     else
       log_error "Cannot fetch QRSPI package: curl+tar or git required."
       exit 1
+    fi
+
+    if [ -d "$TMP_SRC_DIR/skills/${SKILL_NAME}" ]; then
+      SOURCE_DIR="$TMP_SRC_DIR/skills/${SKILL_NAME}"
+    else
+      SOURCE_DIR="$TMP_SRC_DIR"
     fi
   fi
 

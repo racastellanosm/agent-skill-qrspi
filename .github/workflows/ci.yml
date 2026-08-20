@@ -19,21 +19,21 @@ jobs:
       - name: Validate SKILL.md Frontmatter & Spec
         run: |
           echo "Validating SKILL.md existence and format..."
-          test -f SKILL.md
-          grep -q "^name: qrspi-methodology" SKILL.md
-          grep -q "^description:" SKILL.md
-          grep -q "^license: MIT" SKILL.md
+          test -f skills/qrspi-methodology/SKILL.md
+          grep -q "^name: qrspi-methodology" skills/qrspi-methodology/SKILL.md
+          grep -q "^description:" skills/qrspi-methodology/SKILL.md
+          grep -q "^license: MIT" skills/qrspi-methodology/SKILL.md
 
       - name: Lint Shell Scripts
         run: |
           shellcheck install.sh
-          shellcheck scripts/verify-session.sh
-          shellcheck scripts/verify-security.sh
-          shellcheck hooks/prompt-hook.sh
+          shellcheck skills/qrspi-methodology/scripts/verify-session.sh
+          shellcheck skills/qrspi-methodology/scripts/verify-security.sh
+          shellcheck skills/qrspi-methodology/hooks/prompt-hook.sh
 
       - name: Run Repository Security & Integrity Audit
         run: |
-          ./scripts/verify-security.sh
+          ./skills/qrspi-methodology/scripts/verify-security.sh
 
       - name: Test Installation Script (Dry Run & Multi-Harness)
         run: |
@@ -47,4 +47,4 @@ jobs:
 
       - name: Test Session Validator Script
         run: |
-          ./scripts/verify-session.sh references/stage-templates
+          ./skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/references/stage-templates

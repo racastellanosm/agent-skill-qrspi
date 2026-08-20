@@ -28,7 +28,7 @@ QRSPI enforces a strict phase-gated engineering process to eliminate hallucinati
 ### 1. Via `skills.sh` / Vercel Labs CLI
 ```bash
 # Add directly to your project workspace
-npx skills add https://github.com/racastellanosm/agent-skill-qrspi
+npx skills add racastellanosm/agent-skill-qrspi
 
 # Or search via find-skills
 npx skills find qrspi
@@ -70,21 +70,24 @@ Copy the directory contents to your target harness path:
 
 ```
 .
-├── SKILL.md                  # Canonical Agent Skill specification & prompt rules
-├── references/
-│   ├── stage-templates/      # Modular stage templates (1-question.md -> 5-implement.md)
-│   │   ├── 1-question.md
-│   │   ├── 2-research.md
-│   │   ├── 3-structure.md
-│   │   ├── 4-plan.md
-│   │   └── 5-implement.md
-│   ├── index-template.md     # Template for .qrspi/INDEX.md living ADR
-│   └── phases-checklist.md   # Quick-reference phase gate checklist
-├── scripts/
-│   ├── verify-security.sh    # POSIX security & integrity auditor (Trojan Source & anti-malware)
-│   └── verify-session.sh     # Agent-executable modular session validator
-├── hooks/
-│   └── prompt-hook.sh        # Agent Lifecycle Hook (Claude Code / Gemini CLI)
+├── .github/                  # CI/CD workflows and CODEOWNERS
+├── skills/
+│   └── qrspi-methodology/    # 📦 Pure Agent Skill Package (agentskills.io / skills.sh)
+│       ├── SKILL.md          # Canonical Agent Skill specification & prompt rules
+│       ├── hooks/
+│       │   └── prompt-hook.sh # Agent Lifecycle Hook (Claude Code / Gemini CLI)
+│       ├── references/
+│       │   ├── stage-templates/ # Modular stage templates (1-question.md -> 5-implement.md)
+│       │   │   ├── 1-question.md
+│       │   │   ├── 2-research.md
+│       │   │   ├── 3-structure.md
+│       │   │   ├── 4-plan.md
+│       │   │   └── 5-implement.md
+│       │   ├── index-template.md # Template for .qrspi/INDEX.md living ADR
+│       │   └── phases-checklist.md # Quick-reference phase gate checklist
+│       └── scripts/
+│           ├── verify-security.sh # POSIX security & integrity auditor
+│           └── verify-session.sh  # Modular session validator
 ├── AGENTS.md                 # Repository governance & agent directives
 ├── CHANGELOG.md              # Version history following Keep a Changelog
 ├── install.sh                # Zero-dependency POSIX installation script
