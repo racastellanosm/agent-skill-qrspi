@@ -27,13 +27,13 @@ jobs:
       - name: Lint Shell Scripts
         run: |
           shellcheck install.sh
+          shellcheck .github/scripts/verify-security.sh
           shellcheck skills/qrspi-methodology/scripts/verify-session.sh
-          shellcheck skills/qrspi-methodology/scripts/verify-security.sh
           shellcheck skills/qrspi-methodology/hooks/prompt-hook.sh
 
       - name: Run Repository Security & Integrity Audit
         run: |
-          ./skills/qrspi-methodology/scripts/verify-security.sh
+          ./.github/scripts/verify-security.sh
 
       - name: Test Installation Script (Dry Run & Multi-Harness)
         run: |

@@ -70,7 +70,9 @@ Copy the directory contents to your target harness path:
 
 ```
 .
-├── .github/                  # CI/CD workflows and CODEOWNERS
+├── .github/                  # CI/CD workflows, CODEOWNERS, and security auditor
+│   └── scripts/
+│       └── verify-security.sh # POSIX security & integrity auditor
 ├── skills/
 │   └── qrspi-methodology/    # 📦 Pure Agent Skill Package (agentskills.io / skills.sh)
 │       ├── SKILL.md          # Canonical Agent Skill specification & prompt rules
@@ -86,7 +88,6 @@ Copy the directory contents to your target harness path:
 │       │   ├── index-template.md # Template for .qrspi/INDEX.md living ADR
 │       │   └── phases-checklist.md # Quick-reference phase gate checklist
 │       └── scripts/
-│           ├── verify-security.sh # POSIX security & integrity auditor
 │           └── verify-session.sh  # Modular session validator
 ├── AGENTS.md                 # Repository governance & agent directives
 ├── CHANGELOG.md              # Version history following Keep a Changelog

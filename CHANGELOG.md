@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.1] - 2026-08-20
+
+### Fixed
+- **Supply Chain Security & False Positive Resolution**: Moved the internal security auditor (`verify-security.sh`) out of the distributable skill directory to `.github/scripts/verify-security.sh`, ensuring the distributed package is 100% clean and preventing false-positive malware/exfiltration alerts in automated security scanners (Socket, Snyk, and Gen).
+
 ## [1.9.0] - 2026-08-20
 
 ### Changed

@@ -5,7 +5,7 @@
 **Audience:** AI agents and platform engineers contributing to or maintaining this skill.  
 **Standard:** [agentskills.io Open Specification](https://agentskills.io/specification)  
 **Documentation & Code Language:** English (all code, templates, scripts, and documentation).  
-**Version:** 1.9.0  
+**Version:** 1.9.1  
 
 ---
 
@@ -25,6 +25,8 @@ This repository is the canonical reference implementation and distribution packa
 ```text
 .
 ├── .github/
+│   ├── scripts/
+│   │   └── verify-security.sh     # POSIX security auditor (Trojan Source, malware, exfil)
 │   ├── workflows/
 │   │   ├── ci.yml                 # CI/CD: YAML spec validation, shellcheck & multi-harness tests
 │   │   └── security.yml           # Security: Gitleaks secret scanning & least-privilege audit
@@ -44,7 +46,6 @@ This repository is the canonical reference implementation and distribution packa
 │       │   ├── index-template.md  # Template for .qrspi/INDEX.md (Living ADR)
 │       │   └── phases-checklist.md # Compact phase-gate quality checklist
 │       └── scripts/
-│           ├── verify-security.sh # POSIX security auditor (Trojan Source, malware, exfil)
 │           └── verify-session.sh  # POSIX validator for modular QRSPI session directories
 ├── .gitignore                     # OS and editor ignore rules
 ├── AGENTS.md                      # Agent governance, harnessing, and release protocols
@@ -75,7 +76,7 @@ The skill installer (`install.sh`) must maintain determinism and support both **
 - **Shellcheck Mandatory:** All `.sh` files must pass `shellcheck -s sh` with zero warnings.
 - **Strict File Permissions:**
   - Directories: `755` (`drwxr-xr-x`)
-  - Executables (`install.sh`, `skills/qrspi-methodology/scripts/*.sh`, `skills/qrspi-methodology/hooks/*.sh`): `755` (`-rwxr-xr-x`)
+  - Executables (`install.sh`, `.github/scripts/*.sh`, `skills/qrspi-methodology/scripts/*.sh`, `skills/qrspi-methodology/hooks/*.sh`): `755` (`-rwxr-xr-x`)
   - Documentation and templates (`SKILL.md`, `*.md`): `644` (`-rw-r--r--`)
 - **Deterministic Cleanliness:** `install.sh` must be idempotent and safely handle pre-existing directories without corrupting permissions.
 
@@ -90,7 +91,7 @@ Before proposing changes or creating releases, run the following verification su
 ./skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/references/stage-templates
 
 # 2. Run repository security & integrity audit (Trojan Source, anti-malware, URI checks)
-./skills/qrspi-methodology/scripts/verify-security.sh
+./.github/scripts/verify-security.sh
 
 # 3. Test installation in local multi-harness mode (dry run / test)
 ./install.sh --local --harness=all --force
