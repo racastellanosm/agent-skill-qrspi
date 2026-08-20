@@ -1,0 +1,13 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Engineering Methodology",
+      "description": "Deterministic 5-phase engineering workflow (Question, Research, Structure, Plan, Implement) with Dynamic Model Tiering for AI coding assistants.",
+      "skills": [
+        "qrspi-methodology"
+      ]
+    }
+  ]
+}
