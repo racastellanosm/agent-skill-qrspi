@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.3] - 2026-08-20
+
+### Security & Hardening
+- **Strict Supply-Chain & Scanner Remediation**:
+  - Removed `curl | sh` instructions from `README.md` to eliminate remote code execution warnings (`Snyk E005 / W012`).
+  - Hardened `install.sh` to operate strictly as an offline/deterministic local installer without unpinned mutable branch downloads (`Socket Security Alert`).
+  - Cleaned `prompt-hook.sh` stdin inspection to prevent unnecessary prompt reflection warnings (`Snyk W011`).
+
 ## [1.9.2] - 2026-08-20
 
 ### Added

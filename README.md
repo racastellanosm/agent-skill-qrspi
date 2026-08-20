@@ -25,7 +25,7 @@ QRSPI enforces a strict phase-gated engineering process to eliminate hallucinati
 
 ## 📦 Installation
 
-### 1. Via `skills.sh` / Vercel Labs CLI
+### 1. Via `skills.sh` / Vercel Labs CLI (Recommended)
 ```bash
 # Add directly to your project workspace
 npx skills add racastellanosm/agent-skill-qrspi
@@ -34,26 +34,20 @@ npx skills add racastellanosm/agent-skill-qrspi
 npx skills find qrspi
 ```
 
-### 2. Via Quick One-Liner (POSIX curl)
-```bash
-# Install locally in current workspace (e.g. for Google Gemini / Antigravity)
-curl -sSL https://raw.githubusercontent.com/racastellanosm/agent-skill-qrspi/main/install.sh | sh -s -- --local --harness=gemini
-
-# Install locally for all supported harnesses
-curl -sSL https://raw.githubusercontent.com/racastellanosm/agent-skill-qrspi/main/install.sh | sh -s -- --local --harness=all
-
-# Or install globally for current user
-curl -sSL https://raw.githubusercontent.com/racastellanosm/agent-skill-qrspi/main/install.sh | sh -s -- --global --harness=gemini
-```
-
-### 3. Via Repository Clone & Interactive Installer
+### 2. Via Multi-Harness Installer (POSIX `/bin/sh`)
+Clone the repository and run the standalone installer for targeted harnesses:
 ```bash
 git clone https://github.com/racastellanosm/agent-skill-qrspi.git
 cd agent-skill-qrspi
-./install.sh
+
+# Install locally in current workspace (e.g. for Google Gemini / Antigravity)
+./install.sh --local --harness=gemini
+
+# Install locally for all supported harnesses
+./install.sh --local --harness=all
 ```
 
-### 4. Manual Installation
+### 3. Manual Installation
 Copy the directory contents to your target harness path:
 
 | Harness | Global Path | Workspace / Local Path |

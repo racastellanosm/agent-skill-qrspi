@@ -363,26 +363,10 @@ install_to_path() {
 main() {
   print_banner
 
-  # Resolve source directory: Local clone vs Remote curl | sh stream
+  # Resolve source directory
   if [ ! -f "${SOURCE_DIR}/SKILL.md" ]; then
-    log_info "Running in remote installer mode. Fetching QRSPI package from GitHub..."
-    TMP_SRC_DIR="$(mktemp -d 2>/dev/null || mktemp -d -t 'qrspi-install')"
-    trap 'rm -rf "$TMP_SRC_DIR"' EXIT HUP INT TERM
-
-    if command -v curl >/dev/null 2>&1 && command -v tar >/dev/null 2>&1; then
-      curl -sSL https://github.com/racastellanosm/agent-skill-qrspi/archive/refs/heads/main.tar.gz | tar -xz -C "$TMP_SRC_DIR" --strip-components=1
-    elif command -v git >/dev/null 2>&1; then
-      git clone --depth=1 https://github.com/racastellanosm/agent-skill-qrspi.git "$TMP_SRC_DIR" >/dev/null 2>&1
-    else
-      log_error "Cannot fetch QRSPI package: curl+tar or git required."
-      exit 1
-    fi
-
-    if [ -d "$TMP_SRC_DIR/skills/${SKILL_NAME}" ]; then
-      SOURCE_DIR="$TMP_SRC_DIR/skills/${SKILL_NAME}"
-    else
-      SOURCE_DIR="$TMP_SRC_DIR"
-    fi
+    log_error "Failed to locate SKILL.md in source package (${SOURCE_DIR}). Please run install.sh from the repository root."
+    exit 1
   fi
 
   # Final source verification
