@@ -115,7 +115,7 @@ my-project/
 2. **Efficient Human Review:** 
    - **Design Review:** Architects and tech leads only review `3-structure.md`.
    - **Pull Request Review:** The team reviews `5-implement.md` to verify test execution and linter output.
-3. **Living ADR (`.qrspi/INDEX.md`):** Maintains the centralized index of architectural decisions with direct relative links to each feature folder.
+3. **Living ADR & Configurable Destination:** Maintains the centralized index of architectural decisions. Defaults to `.qrspi/`, with configurable support for `.docs/`, `.implementations/`, or `.sessions/` defined in your project's `AGENTS.md`.
 
 ---
 

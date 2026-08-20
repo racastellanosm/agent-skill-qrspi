@@ -1,7 +1,7 @@
 ---
 name: qrspi-methodology
 description: Enforces the QRSPI (Question, Research, Structure, Plan, Implement) engineering methodology. Triggers whenever starting complex features, architectural refactors, multi-file bug investigations, system migrations, or new implementations to ensure zero hallucinations and deterministic software delivery.
-version: 1.9.3
+version: 1.10.0
 author: Raul Castellanos
 license: MIT
 compatibility:
@@ -38,6 +38,33 @@ The **QRSPI** methodology is an agentic engineering protocol designed to guarant
 ```
 
 Every non-trivial engineering task **MUST** complete each phase sequentially before advancing to the next. Do not skip phases or jump straight to writing code.
+
+---
+
+## When NOT to Use QRSPI (Anti-Triggers)
+
+Do **NOT** trigger the 5-phase QRSPI workflow for:
+1. **Trivial 1-2 Line Edits & Typos**: Simple spelling corrections, formatting fixes, or single-line syntax adjustments.
+2. **Pure Informational Lookups**: Answering user questions about code behavior, architecture explanation, or file navigation without modifications.
+3. **Direct Version Control & Release Commands**: Branching, tagging, pushing, or opening PRs upon explicit user command.
+4. **Ad-hoc Scratch Tasks**: Running one-off debugging scripts or exploratory CLI inspections.
+
+---
+
+## Session Directory Configuration
+
+By default, QRSPI persists session records under **`.qrspi/`**:
+- Master ADR registry: `.qrspi/INDEX.md`
+- Active session files: `.qrspi/sessions/YYYY-MM-DD-<slug>/1-question.md` through `5-implement.md`
+
+### Customizing Session Destination:
+The user can customize the session root in their workspace's [`AGENTS.md`](file:///Users/rcastellanosm/Documents/projects/github/personal/agent-skills/qrspi-agent-skill/AGENTS.md) or via prompt preference. The supported alternative roots are:
+- **`.qrspi/`** *(Default)*
+- **`.docs/`** (e.g. `.docs/sessions/YYYY-MM-DD-<slug>/`)
+- **`.implementations/`** (e.g. `.implementations/sessions/YYYY-MM-DD-<slug>/`)
+- **`.sessions/`** (e.g. `.sessions/YYYY-MM-DD-<slug>/`)
+
+When a custom session directory is specified in `AGENTS.md`, the agent **MUST** use that path for all phase persistence and ADR index updates.
 
 ---
 

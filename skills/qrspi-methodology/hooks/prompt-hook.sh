@@ -16,11 +16,19 @@ ACTIVE_STAGE="1 (Question)"
 MODEL_WEIGHT="MEDIUM (Standard Reasoning)"
 STAGE_GOAL="Deconstruct requirements, perform codebase pre-check, and stress-test failure vectors."
 
-# Detect active session directory under .qrspi/sessions/
-if [ -d ".qrspi/sessions" ]; then
+# Detect active session directory across supported roots (.qrspi, .sessions, .implementations, .docs)
+SESSION_ROOT=""
+for candidate in ".qrspi/sessions" ".sessions/sessions" ".sessions" ".implementations/sessions" ".implementations" ".docs/sessions" ".docs/qrspi/sessions" ".docs"; do
+  if [ -d "$candidate" ]; then
+    SESSION_ROOT="$candidate"
+    break
+  fi
+done
+
+if [ -n "$SESSION_ROOT" ] && [ -d "$SESSION_ROOT" ]; then
   # Find latest session directory in POSIX-compliant manner
   LATEST_SESSION=""
-  for dir in .qrspi/sessions/*; do
+  for dir in "$SESSION_ROOT"/*; do
     if [ -d "$dir" ]; then
       LATEST_SESSION="$dir"
     fi
