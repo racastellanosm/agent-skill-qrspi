@@ -34,6 +34,7 @@
 | **2. Architecture & Design** | *Design paradigm (DDD, Clean Architecture, OOP, Functional)?* | e.g. Domain-Driven Design / Modular Monolith | `[PENDING | CONFIRMED]` |
 | **3. Testing Methodology** | *Test strategy (TDD, unit vs integration, mock strategy)?* | e.g. Strict Test-Driven Development (TDD) | `[PENDING | CONFIRMED]` |
 | **4. Concurrency & Invariants** | *Thread safety, sync/async, memory vs persistence, error modeling?* | e.g. Mutex-protected in-memory + Result types | `[PENDING | CONFIRMED]` |
+| **5. Session Persistence Root** | *Where should QRSPI sessions & INDEX.md live?* | e.g. `.qrspi/` (default), `.docs/`, `.implementations/`, `.sessions/` | `[PENDING | CONFIRMED]` |
 
 ## 1.5 Socratic Stress-Testing & Failure Vectors
 | Failure Vector | Stress Question / Probe Scenario | Mitigating Strategy / Decision |

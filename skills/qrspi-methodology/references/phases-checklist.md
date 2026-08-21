@@ -4,11 +4,11 @@ Use this checklist to ensure phase-gates and user sign-offs are strictly complet
 
 ## Phase 1: Question
 - [ ] Autonomous pre-check executed ("Zero Lazy Questions" rule: code explored before asking).
-- [ ] Foundational interrogation completed across 4 pillars (Stack, Architecture/DDD, TDD/Testing, Concurrency).
+- [ ] Foundational interrogation completed across 5 pillars (Stack, Architecture/DDD, TDD/Testing, Concurrency, Session Destination).
 - [ ] Requirements explicitly divided into Functional (FR) and Non-Functional (NFR).
 - [ ] Socratic stress-testing applied across 4 failure vectors (failure modes, concurrency, migration, boundaries).
 - [ ] Decision trees walked branch-by-branch and structured options formulated with trade-offs.
-- [ ] `1-question.md` written to session folder.
+- [ ] `1-question.md` written to configured session folder.
 - [ ] **MANDATORY HARD STOP:** Agent ended turn, presented questions, and received explicit user approval.
 
 ## Phase 2: Research
