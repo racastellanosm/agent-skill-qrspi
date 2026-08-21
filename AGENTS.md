@@ -5,7 +5,7 @@
 **Audience:** AI agents and platform engineers contributing to or maintaining skills in this repository.  
 **Standard:** [agentskills.io Open Specification](https://agentskills.io/specification)  
 **Documentation & Code Language:** English (all code, templates, scripts, and documentation).  
-**Version:** 1.12.1  
+**Version:** 1.12.2  
 
 ---
 
@@ -35,6 +35,7 @@ This repository is the canonical reference implementation and distribution packa
 ├── skills/
 │   └── qrspi-methodology/        # 📦 Canonical Agent Skill Package
 │       ├── SKILL.md               # Canonical Agent Skill definition (agentskills.io)
+│       ├── README.md              # Public documentation and usage guide
 │       ├── hooks/
 │       │   └── prompt-hook.sh     # Agent Lifecycle Hook (Claude Code / Gemini CLI)
 │       ├── references/
@@ -60,7 +61,7 @@ This repository is the canonical reference implementation and distribution packa
 
 ## 3. Harness Support & Installation Paths
 
-The skill installer (`install.sh`) must maintain determinism and support both **global** (`$HOME`) and **local** (workspace root `.`) scopes across all target harnesses:
+The skill catalog supports installation via `npx skills add racastellanosm/agent-skills` across both **global** (`$HOME`) and **local** (workspace root `.`) scopes:
 
 | Target Harness | Global Scope Path | Local / Workspace Scope Path |
 | :--- | :--- | :--- |

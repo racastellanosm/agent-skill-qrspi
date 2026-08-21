@@ -1,6 +1,7 @@
 # QRSPI Architecture Decision & Session Index (Living ADR)
 
-This document is the centralized registry of all features, refactors, and architectural decisions conducted via the QRSPI methodology.
+**Configured Session Root:** `<session-root>` *(e.g. `.qrspi/`, `.docs/`, `.implementations/`, `.sessions/`)*  
+**Purpose:** Centralized repository index and living architecture decision registry for all QRSPI feature sessions.
 
 ---
 

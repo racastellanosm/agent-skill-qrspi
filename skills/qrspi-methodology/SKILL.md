@@ -1,23 +1,20 @@
 ---
 name: qrspi-methodology
 description: Enforces the QRSPI (Question, Research, Structure, Plan, Implement) engineering methodology. Triggers whenever starting complex features, architectural refactors, multi-file bug investigations, system migrations, or new implementations to ensure zero hallucinations and deterministic software delivery.
-version: 1.12.1
+version: 1.12.2
 author: Raul Castellanos
 license: MIT
 compatibility:
   - gemini-cli
   - antigravity
   - claude-code
-  - codex-cli
+  - codex
+  - cursor
   - opencode
-metadata:
-  standard: agentskills.io/v1
-  category: engineering-methodology
-  tags:
-    - workflow
-    - architecture
-    - refactor
-    - quality-assurance
+categories:
+  - workflow
+  - architecture
+  - quality-assurance
 allowed-tools:
   - view_file
   - grep_search
@@ -61,7 +58,7 @@ QRSPI enforces a strict phase-gated engineering process to eliminate hallucinati
 
 ---
 
-## When NOT to Use QRSPI (Anti-Triggers)
+## ⚠️ Anti-Triggers (When NOT to trigger QRSPI)
 
 Do **NOT** trigger the 5-phase QRSPI workflow for:
 1. **Trivial 1-2 Line Edits & Typos**: Simple spelling corrections, formatting fixes, or single-line syntax adjustments.
@@ -71,20 +68,21 @@ Do **NOT** trigger the 5-phase QRSPI workflow for:
 
 ---
 
-## Session Directory Configuration
+## Session Directory Protocol & Persistence
 
-By default, QRSPI persists session records directly under **`.qrspi/`**:
+QRSPI persists session records directly under the configured session root:
 - Master ADR registry: `<session-root>/INDEX.md`
 - Active session files: `<session-root>/YYYY-MM-DD-<slug>/1-question.md` through `5-implement.md`
 
-### Customizing Session Destination:
-The user can customize the session root in their workspace's [`AGENTS.md`](file:///Users/rcastellanosm/Documents/projects/github/personal/agent-skills/qrspi-agent-skill/AGENTS.md) or via prompt preference. The supported alternative roots are:
-- **`.qrspi/`** *(Default, e.g. `.qrspi/YYYY-MM-DD-<slug>/`)*
-- **`.docs/`** (e.g. `.docs/YYYY-MM-DD-<slug>/`)
-- **`.implementations/`** (e.g. `.implementations/YYYY-MM-DD-<slug>/`)
-- **`.sessions/`** (e.g. `.sessions/YYYY-MM-DD-<slug>/`)
-
-> **Note:** Feature session folders are placed directly inside the selected root directory without any intermediate nested folders. When a custom session directory is specified in `AGENTS.md`, the agent **MUST** use that path for all phase persistence and ADR index updates.
+### 🔍 Automated Discovery & Zero-Overhead Persistence Rule:
+1. **Existing Repository Scan (Zero Lazy Questions):** Before prompting the user, the agent checks if any session root or `INDEX.md` already exists (`.qrspi/`, `.docs/`, `.implementations/`, `.sessions/`) or if `AGENTS.md` defines a preferred root. If found, the agent **automatically adopts that root without re-asking**.
+2. **Fresh Repository Setup (First-Time Interrogation):** If no session root or `INDEX.md` exists anywhere in the repository, the agent **MUST include the session destination as Pillar 5 in the Phase 1 Foundation Interrogation Matrix**:
+   - **`.qrspi/`** *(Default / Recommended - Isolated hidden folder)*
+   - **`.docs/`** *(Standard visible project documentation)*
+   - **`.implementations/`** *(Dedicated architecture and delivery records)*
+   - **`.sessions/`** *(Permanent or temporal session directory)*
+   - **Custom Path** *(User-specified directory)*
+3. **Persistent ADR Anchor:** Upon user confirmation, the agent creates `<chosen-root>/INDEX.md` with `**Configured Session Root:** <path>`, guaranteeing that all subsequent feature sessions automatically persist in that directory.
 
 ---
 
@@ -95,11 +93,12 @@ Eliminate requirements ambiguity, challenge implicit assumptions, stress-test de
 
 ### Action Items
 1. **Autonomous Codebase Pre-Check ("Zero Lazy Questions" Rule)**: Before asking the user any question, actively explore the workspace (`grep_search`, `view_file`, `find_by_name`) to answer questions where codebase context is already available. Never ask what the repository already tells you.
-2. **Mandatory Foundation Interrogation ("Zero Assumptions" Rule)**: If the workspace or prompt leaves foundational design dimensions underspecified, the agent **MUST NOT ASSUME**. It MUST proactively interrogate the user across 4 foundational pillars:
-   - **Stack & Ecosystem:** Target programming language, runtime version, allowed external dependencies vs zero-dependency standard library.
-   - **Architectural Paradigm:** Design methodology (Domain-Driven Design / DDD, Clean Architecture / Hexagonal, OOP vs Functional, Modular Monolith).
-   - **Quality & Testing Methodology:** Testing strategy (Test-Driven Development / TDD, unit vs integration, mock strategy, property testing).
-   - **Concurrency & State Invariants:** Thread safety, sync vs async, in-memory vs persistent storage, error modeling (Result types, exceptions, error codes).
+2. **Mandatory Foundation Interrogation ("Zero Assumptions" Rule)**: If the workspace or prompt leaves foundational design dimensions underspecified, the agent **MUST NOT ASSUME**. It MUST proactively interrogate the user across 5 foundational pillars:
+   - **1. Stack & Ecosystem:** Target programming language, runtime version, allowed external dependencies vs zero-dependency standard library.
+   - **2. Architectural Paradigm:** Design methodology (Domain-Driven Design / DDD, Clean Architecture / Hexagonal, OOP vs Functional, Modular Monolith).
+   - **3. Quality & Testing Methodology:** Testing strategy (Test-Driven Development / TDD, unit vs integration, mock strategy, property testing).
+   - **4. Concurrency & State Invariants:** Thread safety, sync vs async, in-memory vs persistent storage, error modeling (Result types, exceptions, error codes).
+   - **5. Session Persistence Root:** If no prior session root exists, confirm where QRSPI sessions & `INDEX.md` should live (`.qrspi/`, `.docs/`, `.implementations/`, `.sessions/`, or custom).
 3. **Deconstruct Requirements**: Break down the user prompt into explicit Functional Requirements (FRs) and Non-Functional Requirements (NFRs).
 4. **Socratic Stress-Testing (4 Failure Vectors)**: Proactively probe and stress-test the proposal across:
    - **Failure Modes & Resilience**: Downstream outages, network timeouts, fallback behaviors.
@@ -107,10 +106,10 @@ Eliminate requirements ambiguity, challenge implicit assumptions, stress-test de
    - **Backward Compatibility & Migrations**: Breaking API contracts, legacy schema conversions.
    - **Boundary Conditions & Limits**: Empty collections, null states, extreme payload sizes.
 5. **Walk Decision Trees Branch-by-Branch**: When multiple architectural paths exist, present 2-3 structured options with trade-offs and validate interactively with the user (`ask_question` / prompt).
-6. **Persist Stage 1**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/1-question.md` (default: `.qrspi/YYYY-MM-DD-<feature-slug>/1-question.md`).
+6. **Persist Stage 1**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/1-question.md` (e.g. `.qrspi/YYYY-MM-DD-<feature-slug>/1-question.md`).
 
 ### Mandatory Hard Stop (Turn Termination)
-> 🛑 **MANDATORY GATE:** Output the foundational questions (stack, architecture, TDD/methodology), failure vectors, and requirements breakdown to the user. **STOP calling tools and END YOUR TURN.** Do NOT proceed to Phase 2 until the user reviews and confirms approval.
+> 🛑 **MANDATORY GATE:** Output the foundational questions (stack, architecture, TDD/methodology, session root), failure vectors, and requirements breakdown to the user. **STOP calling tools and END YOUR TURN.** Do NOT proceed to Phase 2 until the user reviews and confirms approval.
 
 ---
 
