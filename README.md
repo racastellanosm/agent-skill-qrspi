@@ -1,4 +1,4 @@
-# Agent Skills Catalog
+# My Everyday Engineering Agent Skills
 
 [![agentskills.io](https://img.shields.io/badge/spec-agentskills.io-blue.svg)](https://agentskills.io)
 [![skills.sh](https://skills.sh/b/racastellanosm/agent-skills)](https://skills.sh/racastellanosm/agent-skills)

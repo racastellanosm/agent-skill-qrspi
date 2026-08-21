@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.12.3] - 2026-08-21
 
 ### Changed
-- **Header Cleanliness**: Streamlined main catalog title in `README.md` to `# Agent Skills Catalog`.
+- **Header Positioning**: Updated main catalog title in `README.md` to `# My Everyday Engineering Agent Skills` to highlight practical, battle-tested engineering workflows.
 
 ## [1.12.2] - 2026-08-21
 
