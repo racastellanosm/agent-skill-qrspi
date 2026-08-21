@@ -1,7 +1,7 @@
 # QRSPI Agent Skill (`qrspi-methodology`)
 
 [![agentskills.io](https://img.shields.io/badge/spec-agentskills.io-blue.svg)](https://agentskills.io)
-[![skills.sh](https://skills.sh/b/racastellanosm/agent-skill-qrspi)](https://skills.sh/racastellanosm/agent-skill-qrspi)
+[![skills.sh](https://skills.sh/b/racastellanosm/agent-skills)](https://skills.sh/racastellanosm/agent-skills)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 
@@ -28,36 +28,26 @@ QRSPI enforces a strict phase-gated engineering process to eliminate hallucinati
 
 ## 📦 Installation
 
-### 1. Via `skills.sh` / Vercel Labs CLI (Recommended)
+### 1. Via `skills.sh` / Vercel Labs CLI (Universal Standard)
 ```bash
 # Add directly to your project workspace
-npx skills add racastellanosm/agent-skill-qrspi
+npx skills add racastellanosm/agent-skills
+
+# Install globally across all sessions
+npx skills add racastellanosm/agent-skills -g
 
 # Or search via find-skills
 npx skills find qrspi
 ```
 
-### 2. Via Multi-Harness Installer (POSIX `/bin/sh`)
-Clone the repository and run the standalone installer for targeted harnesses:
-```bash
-git clone https://github.com/racastellanosm/agent-skill-qrspi.git
-cd agent-skill-qrspi
-
-# Install locally in current workspace (e.g. for Google Gemini / Antigravity)
-./install.sh --local --harness=gemini
-
-# Install locally for all supported harnesses
-./install.sh --local --harness=all
-```
-
-### 3. Manual Installation
-Copy the directory contents to your target harness path:
+### 2. Manual Installation
+Clone or copy the directory contents to your target harness path:
 
 | Harness | Global Path | Workspace / Local Path |
 | :--- | :--- | :--- |
 | **Standard (agentskills.io)** | `~/.agents/skills/qrspi-methodology` | `.agents/skills/qrspi-methodology` |
-| **Google Gemini** | `~/.gemini/skills/qrspi-methodology` | `.gemini/skills/qrspi-methodology` |
-| **Anthropic Claude** | `~/.claude/skills/qrspi-methodology` | `.claude/skills/qrspi-methodology` |
+| **Google Gemini (Antigravity)** | `~/.gemini/skills/qrspi-methodology` | `.gemini/skills/qrspi-methodology` |
+| **Anthropic Claude (Claude Code)** | `~/.claude/skills/qrspi-methodology` | `.claude/skills/qrspi-methodology` |
 | **OpenAI Codex** | `~/.codex/skills/qrspi-methodology` | `.codex/skills/qrspi-methodology` |
 | **OpenCode** | `~/.opencode/skills/qrspi-methodology` | `.opencode/skills/qrspi-methodology` |
 
@@ -88,7 +78,6 @@ Copy the directory contents to your target harness path:
 │           └── verify-session.sh  # Modular session validator
 ├── AGENTS.md                 # Repository governance & agent directives
 ├── CHANGELOG.md              # Version history following Keep a Changelog
-├── install.sh                # Zero-dependency POSIX installation script
 ├── LICENSE                   # MIT License
 ├── README.md                 # Public documentation and discovery metadata
 └── skills.sh.json            # skills.sh directory grouping & metadata configuration

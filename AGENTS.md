@@ -1,11 +1,11 @@
 # AGENTS.md
 
-**Project:** `agent-skill-qrspi` (`qrspi-methodology`)  
-**Purpose:** Open-standard Agent Skill repository implementing the 5-phase QRSPI methodology for cross-harness autonomous AI coding assistants (Gemini, Claude, Codex, OpenCode) and `skills.sh` distribution.  
-**Audience:** AI agents and platform engineers contributing to or maintaining this skill.  
+**Project:** `agent-skills` (Canonical Agent Skills Catalog)  
+**Purpose:** Open-standard Agent Skills monorepo implementing and distributing autonomous AI coding assistant skills (including the 5-phase QRSPI methodology) across all major harnesses (Gemini, Claude, Codex, OpenCode) and `skills.sh`.  
+**Audience:** AI agents and platform engineers contributing to or maintaining skills in this repository.  
 **Standard:** [agentskills.io Open Specification](https://agentskills.io/specification)  
 **Documentation & Code Language:** English (all code, templates, scripts, and documentation).  
-**Version:** 1.11.0  
+**Version:** 1.12.0  
 
 ---
 
@@ -15,7 +15,7 @@ This repository is the canonical reference implementation and distribution packa
 
 1. **Strict agentskills.io Compliance:** `SKILL.md` must adhere to the open specification. The YAML frontmatter must validate with valid kebab-case name, description under 1024 characters with explicit semantic triggers, and standard metadata.
 2. **Progressive Disclosure Architecture:** Keep `SKILL.md` token-light (< 500 tokens for discovery). Defer granular checklists and stage templates to `references/` for on-demand retrieval.
-3. **Pure POSIX Compliance (Zero Host Dependencies):** All shell scripts (`install.sh`, `scripts/*.sh`, `hooks/*.sh`) must be pure POSIX `/bin/sh`-compliant, executable across macOS, Linux, and BSD without requiring bash, python, or external dependencies.
+3. **Pure POSIX Compliance (Zero Host Dependencies):** All shell scripts (`.github/scripts/*.sh`, `skills/*/scripts/*.sh`, `skills/*/hooks/*.sh`) must be pure POSIX `/bin/sh`-compliant, executable across macOS, Linux, and BSD without requiring bash, python, or external dependencies.
 4. **Dogfooding & Modular Persistence:** Any complex feature or refactoring must use the modular session structure (`INDEX.md` and `YYYY-MM-DD-<slug>/1-question.md` through `5-implement.md`). By default, sessions live under `.qrspi/`, with configurable support for `.docs/`, `.implementations/`, or `.sessions/` defined in `AGENTS.md` or user preference.
 5. **Mandatory Turn Termination & User Sign-Off:** Exactly one phase executed per turn. After persisting each phase artifact, the agent MUST stop calling tools, output its summary/questions, and end its turn, waiting for explicit user approval before advancing.
 
@@ -51,7 +51,6 @@ This repository is the canonical reference implementation and distribution packa
 ├── .gitignore                     # OS and editor ignore rules
 ├── AGENTS.md                      # Agent governance, harnessing, and release protocols
 ├── CHANGELOG.md                   # Version release notes following Keep a Changelog
-├── install.sh                     # Interactive & non-interactive POSIX installer
 ├── LICENSE                        # MIT License
 ├── README.md                      # Public documentation and skills.sh index metadata
 └── skills.sh.json                 # skills.sh directory grouping & metadata configuration
@@ -78,9 +77,8 @@ The skill installer (`install.sh`) must maintain determinism and support both **
 - **Shellcheck Mandatory:** All `.sh` files must pass `shellcheck -s sh` with zero warnings.
 - **Strict File Permissions:**
   - Directories: `755` (`drwxr-xr-x`)
-  - Executables (`install.sh`, `.github/scripts/*.sh`, `skills/qrspi-methodology/scripts/*.sh`, `skills/qrspi-methodology/hooks/*.sh`): `755` (`-rwxr-xr-x`)
+  - Executables (`.github/scripts/*.sh`, `skills/qrspi-methodology/scripts/*.sh`, `skills/qrspi-methodology/hooks/*.sh`): `755` (`-rwxr-xr-x`)
   - Documentation and templates (`SKILL.md`, `*.md`): `644` (`-rw-r--r--`)
-- **Deterministic Cleanliness:** `install.sh` must be idempotent and safely handle pre-existing directories without corrupting permissions.
 
 ---
 
@@ -95,14 +93,8 @@ Before proposing changes or creating releases, run the following verification su
 # 2. Run repository security & integrity audit (Trojan Source, anti-malware, URI checks)
 ./.github/scripts/verify-security.sh
 
-# 3. Test installation in local multi-harness mode (dry run / test)
-./install.sh --local --harness=all --force
-
-# 4. Clean up test artifacts
-rm -rf .agents .gemini .claude .codex .opencode
-
-# 5. Verify ShellCheck on all scripts
-shellcheck install.sh skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/scripts/verify-security.sh skills/qrspi-methodology/hooks/prompt-hook.sh
+# 3. Verify ShellCheck on all scripts
+shellcheck .github/scripts/verify-security.sh skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/hooks/prompt-hook.sh
 ```
 
 ---

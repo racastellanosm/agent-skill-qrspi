@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.12.0] - 2026-08-21
+
+### Changed
+- **Canonical Repository Renaming**: Renamed repository coordinates to `racastellanosm/agent-skills` to establish a central catalog for agent skills. Updated installation commands (`npx skills add racastellanosm/agent-skills`), badges, and documentation links.
+
+### Removed
+- **Legacy \`install.sh\` Script**: Removed the standalone shell installer in favor of the universal, cross-platform, zero-friction \`npx skills add racastellanosm/agent-skills\` CLI standard. Eliminates shell script maintenance and security scanner false positives.
+
 ## [1.11.0] - 2026-08-21
 
 ### Added
