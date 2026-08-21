@@ -1,8 +1,5 @@
 # QRSPI Methodology Agent Skill (`qrspi-methodology`)
 
-[![agentskills.io](https://img.shields.io/badge/spec-agentskills.io-blue.svg)](https://agentskills.io)
-[![skills.sh](https://skills.sh/b/racastellanosm/agent-skills)](https://skills.sh/racastellanosm/agent-skills/qrspi-methodology)
-
 An autonomous engineering methodology skill implementing the deterministic 5-phase **QRSPI** standard (**Q**uestion, **R**esearch, **S**tructure, **P**lan, **I**mplement) for AI coding assistants.
 
 ---
