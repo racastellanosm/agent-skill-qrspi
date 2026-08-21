@@ -1,4 +1,4 @@
-name: Validate Agent Skill & Installer
+name: Validate Agent Skills & Security
 
 on:
   push:
@@ -26,7 +26,6 @@ jobs:
 
       - name: Lint Shell Scripts
         run: |
-          shellcheck install.sh
           shellcheck .github/scripts/verify-security.sh
           shellcheck skills/qrspi-methodology/scripts/verify-session.sh
           shellcheck skills/qrspi-methodology/hooks/prompt-hook.sh
@@ -34,16 +33,6 @@ jobs:
       - name: Run Repository Security & Integrity Audit
         run: |
           ./.github/scripts/verify-security.sh
-
-      - name: Test Installation Script (Dry Run & Multi-Harness)
-        run: |
-          ./install.sh --help
-          ./install.sh --local --harness=all --force
-          test -f .agents/skills/qrspi-methodology/SKILL.md
-          test -f .gemini/skills/qrspi-methodology/SKILL.md
-          test -f .claude/skills/qrspi-methodology/SKILL.md
-          test -f .codex/skills/qrspi-methodology/SKILL.md
-          test -f .opencode/skills/qrspi-methodology/SKILL.md
 
       - name: Test Session Validator Script
         run: |

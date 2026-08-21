@@ -7,8 +7,7 @@
 # Default fallback owner for everything
 * @racastellanosm
 
-# Critical security, CI/CD workflows, and installers
+# Critical security, CI/CD workflows, and skills
 .github/workflows/*   @racastellanosm
 skills/*              @racastellanosm
-install.sh            @racastellanosm
 AGENTS.md             @racastellanosm
