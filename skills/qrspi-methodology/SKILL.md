@@ -84,17 +84,22 @@ Eliminate requirements ambiguity, challenge implicit assumptions, stress-test de
 
 ### Action Items
 1. **Autonomous Codebase Pre-Check ("Zero Lazy Questions" Rule)**: Before asking the user any question, actively explore the workspace (`grep_search`, `view_file`, `find_by_name`) to answer questions where codebase context is already available. Never ask what the repository already tells you.
-2. **Deconstruct Requirements**: Break down the user prompt into explicit Functional Requirements (FRs) and Non-Functional Requirements (NFRs).
-3. **Socratic Stress-Testing (4 Failure Vectors)**: Proactively probe and stress-test the proposal across:
+2. **Mandatory Foundation Interrogation ("Zero Assumptions" Rule)**: If the workspace or prompt leaves foundational design dimensions underspecified, the agent **MUST NOT ASSUME**. It MUST proactively interrogate the user across 4 foundational pillars:
+   - **Stack & Ecosystem:** Target programming language, runtime version, allowed external dependencies vs zero-dependency standard library.
+   - **Architectural Paradigm:** Design methodology (Domain-Driven Design / DDD, Clean Architecture / Hexagonal, OOP vs Functional, Modular Monolith).
+   - **Quality & Testing Methodology:** Testing strategy (Test-Driven Development / TDD, unit vs integration, mock strategy, property testing).
+   - **Concurrency & State Invariants:** Thread safety, sync vs async, in-memory vs persistent storage, error modeling (Result types, exceptions, error codes).
+3. **Deconstruct Requirements**: Break down the user prompt into explicit Functional Requirements (FRs) and Non-Functional Requirements (NFRs).
+4. **Socratic Stress-Testing (4 Failure Vectors)**: Proactively probe and stress-test the proposal across:
    - **Failure Modes & Resilience**: Downstream outages, network timeouts, fallback behaviors.
    - **Concurrency & Idempotency**: Race conditions, parallel mutations, duplicate submissions.
    - **Backward Compatibility & Migrations**: Breaking API contracts, legacy schema conversions.
    - **Boundary Conditions & Limits**: Empty collections, null states, extreme payload sizes.
-4. **Walk Decision Trees Branch-by-Branch**: When multiple architectural paths exist, present the decision tree and validate trade-offs interactively with the user (`ask_question` / prompt).
-5. **Persist Stage 1**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/1-question.md` (default: `.qrspi/YYYY-MM-DD-<feature-slug>/1-question.md`).
+5. **Walk Decision Trees Branch-by-Branch**: When multiple architectural paths exist, present 2-3 structured options with trade-offs and validate interactively with the user (`ask_question` / prompt).
+6. **Persist Stage 1**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/1-question.md` (default: `.qrspi/YYYY-MM-DD-<feature-slug>/1-question.md`).
 
 ### Mandatory Hard Stop (Turn Termination)
-> 🛑 **MANDATORY GATE:** Output the requirements breakdown, failure vectors, and key open questions to the user. **STOP calling tools and END YOUR TURN.** Do NOT proceed to Phase 2 until the user reviews and confirms approval.
+> 🛑 **MANDATORY GATE:** Output the foundational questions (stack, architecture, TDD/methodology), failure vectors, and requirements breakdown to the user. **STOP calling tools and END YOUR TURN.** Do NOT proceed to Phase 2 until the user reviews and confirms approval.
 
 ---
 
