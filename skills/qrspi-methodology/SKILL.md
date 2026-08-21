@@ -1,7 +1,7 @@
 ---
 name: qrspi-methodology
 description: Enforces the QRSPI (Question, Research, Structure, Plan, Implement) engineering methodology. Triggers whenever starting complex features, architectural refactors, multi-file bug investigations, system migrations, or new implementations to ensure zero hallucinations and deterministic software delivery.
-version: 1.12.0
+version: 1.12.1
 author: Raul Castellanos
 license: MIT
 compatibility:
@@ -37,7 +37,18 @@ The **QRSPI** methodology is an agentic engineering protocol designed to guarant
 [ 1. QUESTION ] ➔ [ 2. RESEARCH ] ➔ [ 3. STRUCTURE ] ➔ [ 4. PLAN ] ➔ [ 5. IMPLEMENT ]
 ```
 
-Every non-trivial engineering task **MUST** complete each phase sequentially before advancing to the next.
+## 🎯 What is QRSPI?
+
+QRSPI enforces a strict phase-gated engineering process to eliminate hallucinations, prevent regressions, and enforce architectural integrity:
+
+1. **Question**: Socratic stress-testing, failure-mode probing, and zero lazy questions (codebase pre-checked).
+2. **Research**: Discover codebase ground truth, dependencies, and blast radius before modifying files.
+3. **Structure**: Define architectural contracts, invariants, types, and trade-offs.
+4. **Plan**: Formulate an atomic step-by-step checklist with verifiable commands.
+5. **Implement**: Execute sequentially with automated lint/test validation.
+
+> 🛑 **Invariant: Exactly One Phase per Turn.**  
+> The agent pauses execution and ends its turn at every single phase, presenting its findings, questions, or plan for explicit user approval before advancing.
 
 ---
 
