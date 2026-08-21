@@ -1,11 +1,11 @@
 # AGENTS.md
 
-**Project:** `agent-skill-qrspi` (`qrspi-methodology`)  
-**Purpose:** Open-standard Agent Skill repository implementing the 5-phase QRSPI methodology for cross-harness autonomous AI coding assistants (Gemini, Claude, Codex, OpenCode) and `skills.sh` distribution.  
-**Audience:** AI agents and platform engineers contributing to or maintaining this skill.  
+**Project:** `agent-skills` (Canonical Agent Skills Catalog)  
+**Purpose:** Open-standard Agent Skills monorepo implementing and distributing autonomous AI coding assistant skills (including the 5-phase QRSPI methodology) across all major harnesses (Gemini, Claude, Codex, OpenCode) and `skills.sh`.  
+**Audience:** AI agents and platform engineers contributing to or maintaining skills in this repository.  
 **Standard:** [agentskills.io Open Specification](https://agentskills.io/specification)  
 **Documentation & Code Language:** English (all code, templates, scripts, and documentation).  
-**Version:** 1.11.0  
+**Version:** 1.12.0  
 
 ---
 

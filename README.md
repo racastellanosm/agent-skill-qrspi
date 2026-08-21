@@ -1,7 +1,7 @@
 # QRSPI Agent Skill (`qrspi-methodology`)
 
 [![agentskills.io](https://img.shields.io/badge/spec-agentskills.io-blue.svg)](https://agentskills.io)
-[![skills.sh](https://skills.sh/b/racastellanosm/agent-skill-qrspi)](https://skills.sh/racastellanosm/agent-skill-qrspi)
+[![skills.sh](https://skills.sh/b/racastellanosm/agent-skills)](https://skills.sh/racastellanosm/agent-skills)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 
@@ -31,7 +31,7 @@ QRSPI enforces a strict phase-gated engineering process to eliminate hallucinati
 ### 1. Via `skills.sh` / Vercel Labs CLI (Recommended)
 ```bash
 # Add directly to your project workspace
-npx skills add racastellanosm/agent-skill-qrspi
+npx skills add racastellanosm/agent-skills
 
 # Or search via find-skills
 npx skills find qrspi
@@ -40,8 +40,8 @@ npx skills find qrspi
 ### 2. Via Multi-Harness Installer (POSIX `/bin/sh`)
 Clone the repository and run the standalone installer for targeted harnesses:
 ```bash
-git clone https://github.com/racastellanosm/agent-skill-qrspi.git
-cd agent-skill-qrspi
+git clone https://github.com/racastellanosm/agent-skills.git
+cd agent-skills
 
 # Install locally in current workspace (e.g. for Google Gemini / Antigravity)
 ./install.sh --local --harness=gemini

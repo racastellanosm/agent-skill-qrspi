@@ -1,6 +1,6 @@
 #!/bin/sh
 # ==============================================================================
-# Security & Integrity Audit Script for agent-skill-qrspi
+# Security & Integrity Audit Script for agent-skills
 # Standard: OpenSSF Best Practices & agentskills.io Security Guardrails
 # Pure POSIX /bin/sh compliant (macOS, Linux, BSD)
 # ==============================================================================
