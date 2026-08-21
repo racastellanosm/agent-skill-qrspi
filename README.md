@@ -1,4 +1,4 @@
-# Agent Skills Catalog (`racastellanosm/agent-skills`)
+# Agent Skills Catalog
 
 [![agentskills.io](https://img.shields.io/badge/spec-agentskills.io-blue.svg)](https://agentskills.io)
 [![skills.sh](https://skills.sh/b/racastellanosm/agent-skills)](https://skills.sh/racastellanosm/agent-skills)
