@@ -24,3 +24,9 @@
 
 ## 2.3 Hard Gate Confirmation
 - [ ] **Gate Passed:** Real file paths, line references, and dependencies verified via tool calls.
+
+## 2.4 Mandatory User Review & Approval Gate
+> 🛑 **MANDATORY HARD STOP:** The agent must present the research discoveries and blast radius findings to the user, STOP calling tools, and END ITS TURN. Do not proceed to Phase 3 until user approval is confirmed below.
+- [ ] **User Approval Confirmed:** `[PENDING | APPROVED]`
+- **Approved by:** `<User Name / Handle>`
+- **Approval Timestamp:** `YYYY-MM-DD HH:MM:SS UTC`

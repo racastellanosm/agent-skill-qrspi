@@ -21,6 +21,9 @@ QRSPI enforces a strict phase-gated engineering process to eliminate hallucinati
 4. **Plan**: Formulate an atomic step-by-step checklist with verifiable commands.
 5. **Implement**: Execute sequentially with automated lint/test validation.
 
+> 🛑 **Invariant: Exactly One Phase per Turn.**  
+> The agent pauses execution and ends its turn at every single phase, presenting its findings, questions, or plan for explicit user approval before advancing.
+
 ---
 
 ## 📦 Installation

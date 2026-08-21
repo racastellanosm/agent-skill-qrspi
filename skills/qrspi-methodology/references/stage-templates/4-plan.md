@@ -27,3 +27,9 @@
 
 ## 4.3 Hard Gate Confirmation
 - [ ] **Gate Passed:** Plan verified with atomic steps and automated validation commands.
+
+## 4.4 Mandatory User Review & Plan Approval Gate
+> 🛑 **MANDATORY HARD STOP:** The agent must present the step-by-step plan and test commands to the user, STOP calling tools, and END ITS TURN. Do not modify source code or proceed to Phase 5 until user approval is confirmed below.
+- [ ] **User Approval Confirmed:** `[PENDING | APPROVED]`
+- **Approved by:** `<User Name / Handle>`
+- **Approval Timestamp:** `YYYY-MM-DD HH:MM:SS UTC`

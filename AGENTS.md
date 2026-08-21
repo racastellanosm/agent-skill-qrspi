@@ -5,18 +5,19 @@
 **Audience:** AI agents and platform engineers contributing to or maintaining this skill.  
 **Standard:** [agentskills.io Open Specification](https://agentskills.io/specification)  
 **Documentation & Code Language:** English (all code, templates, scripts, and documentation).  
-**Version:** 1.10.0  
+**Version:** 1.11.0  
 
 ---
 
 ## 1. Vision & Architectural Invariants
 
-This repository is the canonical reference implementation and distribution package for the **QRSPI Methodology Agent Skill**. Every contributor and AI agent modifying this codebase must uphold four non-negotiable invariants:
+This repository is the canonical reference implementation and distribution package for the **QRSPI Methodology Agent Skill**. Every contributor and AI agent modifying this codebase must uphold five non-negotiable invariants:
 
 1. **Strict agentskills.io Compliance:** `SKILL.md` must adhere to the open specification. The YAML frontmatter must validate with valid kebab-case name, description under 1024 characters with explicit semantic triggers, and standard metadata.
 2. **Progressive Disclosure Architecture:** Keep `SKILL.md` token-light (< 500 tokens for discovery). Defer granular checklists and stage templates to `references/` for on-demand retrieval.
 3. **Pure POSIX Compliance (Zero Host Dependencies):** All shell scripts (`install.sh`, `scripts/*.sh`, `hooks/*.sh`) must be pure POSIX `/bin/sh`-compliant, executable across macOS, Linux, and BSD without requiring bash, python, or external dependencies.
 4. **Dogfooding & Modular Persistence:** Any complex feature or refactoring must use the modular session structure (`INDEX.md` and `YYYY-MM-DD-<slug>/1-question.md` through `5-implement.md`). By default, sessions live under `.qrspi/`, with configurable support for `.docs/`, `.implementations/`, or `.sessions/` defined in `AGENTS.md` or user preference.
+5. **Mandatory Turn Termination & User Sign-Off:** Exactly one phase executed per turn. After persisting each phase artifact, the agent MUST stop calling tools, output its summary/questions, and end its turn, waiting for explicit user approval before advancing.
 
 ---
 

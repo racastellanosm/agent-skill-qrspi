@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2026-08-21
+
+### Added
+- **Mandatory Turn Termination Invariant**: Enforced strict one-phase-per-turn execution across all 5 QRSPI phases. The AI agent MUST stop calling tools, persist the stage artifact, present findings/questions, and end its turn at every single phase, waiting for explicit user sign-off before proceeding.
+- **Phase-Gate Approval Checkpoints in Templates**: Added explicit `User Approval & Sign-Off Gate` sections across all 5 stage templates (`1-question.md` through `5-implement.md`).
+- **Enhanced Lifecycle Hook Directives**: Updated `prompt-hook.sh` to inject strict turn termination and one-phase-per-turn constraints directly into the agent runtime context.
+
 ## [1.10.0] - 2026-08-20
 
 ### Added
