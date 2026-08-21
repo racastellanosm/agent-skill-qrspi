@@ -2,11 +2,8 @@
 
 [![agentskills.io](https://img.shields.io/badge/spec-agentskills.io-blue.svg)](https://agentskills.io)
 [![skills.sh](https://skills.sh/b/racastellanosm/agent-skills)](https://skills.sh/racastellanosm/agent-skills/qrspi-methodology)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](../../LICENSE)
 
 An autonomous engineering methodology skill implementing the deterministic 5-phase **QRSPI** standard (**Q**uestion, **R**esearch, **S**tructure, **P**lan, **I**mplement) for AI coding assistants.
-
-Adheres strictly to the [Agent Skills Open Specification](https://agentskills.io/specification) and distributed via [skills.sh](https://skills.sh/racastellanosm/agent-skills/qrspi-methodology).
 
 ---
 
@@ -26,33 +23,6 @@ QRSPI enforces a strict phase-gated engineering process to eliminate hallucinati
 
 > 🛑 **Invariant: Exactly One Phase per Turn.**  
 > The agent pauses execution and ends its turn at every single phase, presenting its findings, questions, or plan for explicit user approval before advancing.
-
----
-
-## 📦 Installation
-
-### 1. Via `skills.sh` / Vercel Labs CLI (Recommended)
-```bash
-# Add directly to your project workspace
-npx skills add racastellanosm/agent-skills
-
-# Install globally across all sessions
-npx skills add racastellanosm/agent-skills -g
-
-# Or search via find-skills
-npx skills find qrspi
-```
-
-### 2. Manual Installation
-Copy the skill directory to your target harness path:
-
-| Harness | Global Path | Workspace / Local Path |
-| :--- | :--- | :--- |
-| **Standard (agentskills.io)** | `~/.agents/skills/qrspi-methodology` | `.agents/skills/qrspi-methodology` |
-| **Google Gemini (Antigravity)** | `~/.gemini/skills/qrspi-methodology` | `.gemini/skills/qrspi-methodology` |
-| **Anthropic Claude (Claude Code)** | `~/.claude/skills/qrspi-methodology` | `.claude/skills/qrspi-methodology` |
-| **OpenAI Codex** | `~/.codex/skills/qrspi-methodology` | `.codex/skills/qrspi-methodology` |
-| **OpenCode** | `~/.opencode/skills/qrspi-methodology` | `.opencode/skills/qrspi-methodology` |
 
 ---
 
@@ -95,40 +65,9 @@ QRSPI dynamically matches task complexity with the appropriate AI model weight t
 
 ---
 
-## 📂 Skill Package Structure
+## 🔗 References
 
-```text
-skills/qrspi-methodology/
-├── SKILL.md                  # Canonical Agent Skill specification & prompt rules
-├── README.md                 # Public documentation and usage guide
-├── hooks/
-│   └── prompt-hook.sh        # Agent Lifecycle Hook (Claude Code / Gemini CLI)
-├── references/
-│   ├── stage-templates/      # Modular stage templates (1-question.md -> 5-implement.md)
-│   │   ├── 1-question.md
-│   │   ├── 2-research.md
-│   │   ├── 3-structure.md
-│   │   ├── 4-plan.md
-│   │   └── 5-implement.md
-│   ├── index-template.md     # Template for living ADR (.qrspi/INDEX.md)
-│   └── phases-checklist.md   # Quick-reference phase gate checklist
-└── scripts/
-    └── verify-session.sh     # Modular session validator
-```
-
----
-
-## 🔗 References & Ecosystem
-
-- [Agent Skills Open Specification](https://agentskills.io/specification)
-- [skills.sh Registry](https://skills.sh)
 - [Everything We Got Wrong About Research-Plan-Implement](https://www.youtube.com/watch?v=YwZR6tc7qYg) by [Dexter Horthy](https://github.com/dexhorthy)
 - [From RPI to QRSPI: Rebuilding Structured Workflows for Coding Agents](https://alexlavaee.me/blog/from-rpi-to-qrspi/) by [Alex Lavaee](https://github.com/lavaman131)
 - [Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents) by [HumanLayer](https://www.humanlayer.dev/)
 - [grill-me: Relentless Interviewing Skill for Coding Agents](https://skills.sh/mattpocock/skills/grill-me) by [Matt Pocock](https://github.com/mattpocock)
-
----
-
-## 📄 License
-
-Licensed under the [MIT License](../../LICENSE).

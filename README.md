@@ -95,10 +95,6 @@ This repository follows the **agentskills.io Open Monorepo Standard**. To contri
 
 - [Agent Skills Open Specification](https://agentskills.io/specification)
 - [skills.sh Registry](https://skills.sh)
-- [Everything We Got Wrong About Research-Plan-Implement](https://www.youtube.com/watch?v=YwZR6tc7qYg) by [Dexter Horthy](https://github.com/dexhorthy)
-- [From RPI to QRSPI: Rebuilding Structured Workflows for Coding Agents](https://alexlavaee.me/blog/from-rpi-to-qrspi/) by [Alex Lavaee](https://github.com/lavaman131)
-- [Harness Engineering for Coding Agents](https://www.humanlayer.dev/blog/skill-issue-harness-engineering-for-coding-agents) by [HumanLayer](https://www.humanlayer.dev/)
-- [grill-me: Relentless Interviewing Skill for Coding Agents](https://skills.sh/mattpocock/skills/grill-me) by [Matt Pocock](https://github.com/mattpocock)
 
 ---
 
