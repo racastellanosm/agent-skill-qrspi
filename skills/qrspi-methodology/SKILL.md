@@ -1,7 +1,7 @@
 ---
 name: qrspi-methodology
 description: Enforces the QRSPI (Question, Research, Structure, Plan, Implement) engineering methodology. Triggers whenever starting complex features, architectural refactors, multi-file bug investigations, system migrations, or new implementations to ensure zero hallucinations and deterministic software delivery.
-version: 1.10.0
+version: 1.11.0
 author: Raul Castellanos
 license: MIT
 compatibility:
@@ -37,7 +37,16 @@ The **QRSPI** methodology is an agentic engineering protocol designed to guarant
 [ 1. QUESTION ] ➔ [ 2. RESEARCH ] ➔ [ 3. STRUCTURE ] ➔ [ 4. PLAN ] ➔ [ 5. IMPLEMENT ]
 ```
 
-Every non-trivial engineering task **MUST** complete each phase sequentially before advancing to the next. Do not skip phases or jump straight to writing code.
+Every non-trivial engineering task **MUST** complete each phase sequentially before advancing to the next.
+
+---
+
+## 🛑 Non-Negotiable Invariant: Mandatory Turn Termination & User Sign-Off
+
+> [!IMPORTANT]
+> **STRICT EXECUTION GATE: EXACTLY ONE PHASE PER TURN.**  
+> AI Agents **MUST NEVER** execute multiple QRSPI phases in a single continuous turn. At the completion of **EVERY SINGLE PHASE** (after persisting the stage artifact), the agent **MUST STOP CALLING TOOLS, OUTPUT ITS SUMMARY AND QUESTIONS TO THE USER, AND END ITS TURN**.  
+> The agent is **STRICTLY PROHIBITED** from advancing to the subsequent phase until the user explicitly reviews, debugs, and confirms approval in their response.
 
 ---
 
@@ -84,8 +93,8 @@ Eliminate requirements ambiguity, challenge implicit assumptions, stress-test de
 4. **Walk Decision Trees Branch-by-Branch**: When multiple architectural paths exist, present the decision tree and validate trade-offs interactively with the user (`ask_question` / prompt).
 5. **Persist Stage 1**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/1-question.md` (default: `.qrspi/YYYY-MM-DD-<feature-slug>/1-question.md`).
 
-### Hard Gate
-> **Checkpoint:** Proceed to Phase 2 only when the problem statement, acceptance criteria, and failure mode mitigations are 100% deterministic and mutually agreed upon.
+### Mandatory Hard Stop (Turn Termination)
+> 🛑 **MANDATORY GATE:** Output the requirements breakdown, failure vectors, and key open questions to the user. **STOP calling tools and END YOUR TURN.** Do NOT proceed to Phase 2 until the user reviews and confirms approval.
 
 ---
 
@@ -100,8 +109,8 @@ Establish ground-truth facts about the current state of the codebase, dependenci
 3. **Verify Dependencies & Toolchains**: Inspect lockfiles, build configurations (`package.json`, `Cargo.toml`, `go.mod`, `pyproject.toml`), and runtime versions.
 4. **Persist Stage 2**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/2-research.md`.
 
-### Hard Gate
-> **Checkpoint:** Proceed to Phase 3 only with verifiable line-number references, interface definitions, and dependency confirmations documented.
+### Mandatory Hard Stop (Turn Termination)
+> 🛑 **MANDATORY GATE:** Output verifiable line-number references, interface findings, and dependency confirmations to the user. **STOP calling tools and END YOUR TURN.** Do NOT proceed to Phase 3 until the user reviews and confirms approval.
 
 ---
 
@@ -116,8 +125,8 @@ Formulate the architectural blueprint, data structures, invariants, and interfac
 3. **Map Error Handling & Invariants**: Enumerate error states, fallback behaviors, concurrency locks, and idempotency guarantees.
 4. **Persist Stage 3 & Register ADR**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/3-structure.md` and append the record to `<session-root>/INDEX.md`.
 
-### Hard Gate
-> **Checkpoint:** Proceed to Phase 4 only after the system design satisfies all Phase 1 requirements and Phase 2 codebase constraints.
+### Mandatory Hard Stop (Turn Termination)
+> 🛑 **MANDATORY GATE:** Output the architecture design, types, and trade-offs to the user. **STOP calling tools and END YOUR TURN.** Do NOT proceed to Phase 4 until the user reviews and approves the design.
 
 ---
 
@@ -132,8 +141,8 @@ Construct a deterministic, step-by-step checklist where each action has a corres
 3. **Establish Rollback/Checkpoints**: Ensure each phase leaves the repository in a compilable/testable state.
 4. **Persist Stage 4**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/4-plan.md`.
 
-### Hard Gate
-> **Checkpoint:** `4-plan.md` must be instantiated and confirmed prior to modifying source code.
+### Mandatory Hard Stop (Turn Termination)
+> 🛑 **MANDATORY GATE:** Output the step-by-step checklist and automated verification commands to the user. **STOP calling tools and END YOUR TURN.** Do NOT modify source code or start Phase 5 until the user gives explicit approval.
 
 ---
 
@@ -148,6 +157,9 @@ Execute the plan with zero regressions, strict test coverage, and continuous val
 3. **Execute Automated Verification**: Run compilers, linters, and test suites after every logical step (`rtk` or native test runner).
 4. **Persist Stage 5 & Update ADR**: Write `<session-root>/YYYY-MM-DD-<feature-slug>/5-implement.md` and update status in `<session-root>/INDEX.md`.
 5. **Final Regression Sweep**: Verify edge cases, error conditions, and user acceptance criteria against `1-question.md`.
+
+### Final Sign-Off & Verification Proof
+> 🛑 **MANDATORY GATE:** Output the execution summary, test suite results, and proof of verification to the user and request final acceptance.
 
 ---
 

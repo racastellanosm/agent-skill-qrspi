@@ -62,7 +62,7 @@ case "$STDIN_DATA" in
 {
   "injectSteps": [
     {
-      "ephemeralMessage": "[SYSTEM DIRECTIVE: QRSPI METHODOLOGY & MODEL TIER GUARDRAIL]\n• Active Target Phase : Phase ${ACTIVE_STAGE}\n• Recommended Weight  : ${MODEL_WEIGHT}\n• Primary Objective   : ${STAGE_GOAL}\n--------------------------------------------------------------------------------\nYou MUST follow the 5-phase QRSPI engineering standard:\n1. QUESTION -> 2. RESEARCH -> 3. STRUCTURE -> 4. PLAN -> 5. IMPLEMENT\n\nRules:\n- If delegating via subagents (invoke_subagent): Use Model=\"pro\" for Phases 2-4, Model=\"flash\" for Phase 5.\n- If in interactive mode: Remind the user if a model weight switch improves reasoning or saves tokens.\n- Do NOT jump to writing code before completing and persisting Phases 1 through 4."
+      "ephemeralMessage": "[SYSTEM DIRECTIVE: QRSPI METHODOLOGY & MANDATORY TURN TERMINATION]\n• Active Target Phase : Phase ${ACTIVE_STAGE}\n• Recommended Weight  : ${MODEL_WEIGHT}\n• Primary Objective   : ${STAGE_GOAL}\n--------------------------------------------------------------------------------\nYou MUST follow the 5-phase QRSPI engineering standard:\n1. QUESTION -> 2. RESEARCH -> 3. STRUCTURE -> 4. PLAN -> 5. IMPLEMENT\n\nNON-NEGOTIABLE EXECUTION INVARIANTS:\n1. EXACTLY ONE PHASE PER TURN: Execute only the current active phase (${ACTIVE_STAGE}).\n2. MANDATORY TURN TERMINATION: After persisting the stage document, you MUST STOP calling tools, output your summary/questions, and END YOUR TURN.\n3. USER SIGN-OFF GATE: Do NOT proceed to the next phase until the user explicitly reviews and confirms approval in their reply.\n4. Model Weight: Use Model=\"pro\" for Phases 2-4, Model=\"flash\" for Phase 5."
     }
   ]
 }
@@ -73,9 +73,9 @@ esac
 
 # Plain text fallback (Claude Code UserPromptSubmit / CLI direct invocation)
 cat <<EOF
-[SYSTEM DIRECTIVE: QRSPI METHODOLOGY & MODEL TIER GUARDRAIL]
+[SYSTEM DIRECTIVE: QRSPI METHODOLOGY & MANDATORY TURN TERMINATION]
 --------------------------------------------------------------------------------
-💡 COGNITIVE LOAD & MODEL WEIGHT GUARDRAIL:
+💡 COGNITIVE LOAD & PHASE GATE GUARDRAIL:
 • Active Target Phase : Phase ${ACTIVE_STAGE}
 • Recommended Weight  : ${MODEL_WEIGHT}
 • Primary Objective   : ${STAGE_GOAL}
@@ -83,10 +83,11 @@ cat <<EOF
 You MUST follow the 5-phase QRSPI engineering standard:
 1. QUESTION  -> 2. RESEARCH -> 3. STRUCTURE -> 4. PLAN -> 5. IMPLEMENT
 
-Rules:
-- If delegating via subagents (invoke_subagent): Use Model="pro" for Phases 2-4, Model="flash" for Phase 5.
-- If in interactive mode: Remind the user if a model weight switch improves reasoning or saves tokens.
-- Do NOT jump to writing code before completing and persisting Phases 1 through 4.
+NON-NEGOTIABLE EXECUTION INVARIANTS:
+1. EXACTLY ONE PHASE PER TURN: Execute only the current active phase (${ACTIVE_STAGE}).
+2. MANDATORY TURN TERMINATION: After persisting the stage document, you MUST STOP calling tools, output your summary/questions to the user, and END YOUR TURN.
+3. USER SIGN-OFF GATE: Do NOT proceed to the next phase until the user explicitly reviews and confirms approval in their reply.
+4. Model Weight: Use Model="pro" for Phases 2-4, Model="flash" for Phase 5.
 EOF
 
 exit 0

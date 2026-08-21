@@ -51,3 +51,9 @@ Decision Tree:
 - [ ] Criterion 1:
 - [ ] Criterion 2:
 - [ ] **Hard Gate Passed:** Problem statement, failure mode mitigations, and decision branches are 100% deterministic and aligned.
+
+## 1.8 Mandatory User Alignment & Approval Gate
+> 🛑 **MANDATORY HARD STOP:** The agent must present the questions and requirements breakdown above to the user, STOP calling tools, and END ITS TURN. Do not proceed to Phase 2 until user approval is confirmed below.
+- [ ] **User Approval Confirmed:** `[PENDING | APPROVED]`
+- **Approved by:** `<User Name / Handle>`
+- **Approval Timestamp:** `YYYY-MM-DD HH:MM:SS UTC`

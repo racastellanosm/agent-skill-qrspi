@@ -25,3 +25,9 @@
 ## 5.3 Handoff & Merge Notes
 - **Key Changes Summary:**
 - **Known Limitations / Next Steps:**
+
+## 5.4 Mandatory Final User Acceptance & Sign-Off
+> 🛑 **MANDATORY HARD STOP:** The agent must present the implementation summary, test evidence, and verification logs to the user, STOP calling tools, and END ITS TURN.
+- [ ] **Final User Acceptance:** `[PENDING | ACCEPTED]`
+- **Accepted by:** `<User Name / Handle>`
+- **Acceptance Timestamp:** `YYYY-MM-DD HH:MM:SS UTC`

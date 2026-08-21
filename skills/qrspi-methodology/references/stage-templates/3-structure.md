@@ -31,3 +31,9 @@ export interface FeatureContract {
 
 ## 3.4 Hard Gate Confirmation
 - [ ] **Gate Passed:** Architecture satisfies Phase 1 requirements and Phase 2 codebase constraints.
+
+## 3.5 Mandatory User Review & Architecture Approval Gate
+> 🛑 **MANDATORY HARD STOP:** The agent must present the architectural design, contracts, and trade-offs to the user, STOP calling tools, and END ITS TURN. Do not proceed to Phase 4 until user approval is confirmed below.
+- [ ] **User Approval Confirmed:** `[PENDING | APPROVED]`
+- **Approved by:** `<User Name / Handle>`
+- **Approval Timestamp:** `YYYY-MM-DD HH:MM:SS UTC`
