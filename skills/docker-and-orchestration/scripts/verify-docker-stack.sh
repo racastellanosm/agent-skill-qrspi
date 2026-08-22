@@ -39,6 +39,12 @@ printf "%bDocker & Makefile Orchestration Stack Auditor%b\n" "${BLUE}" "${NC}"
 printf "Target: %s\n" "${TARGET_DIR}"
 printf "%b==============================================================================%b\n\n" "${BLUE}" "${NC}"
 
+if [ "${TARGET_DIR}" = "--help" ] || [ "${TARGET_DIR}" = "-h" ]; then
+    printf "Usage: %s [target-directory]\n" "$0"
+    printf "Audits a project's Makefile, Dockerfiles, and Docker Compose configuration for compliance with the Zero-Host-Dependencies standard.\n"
+    exit 0
+fi
+
 if [ ! -d "${TARGET_DIR}" ]; then
     log_fail "Target directory does not exist: ${TARGET_DIR}"
     exit 1
