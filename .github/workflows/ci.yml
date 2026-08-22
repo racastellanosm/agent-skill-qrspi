@@ -16,24 +16,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Validate SKILL.md Frontmatter & Spec
+      - name: Validate All SKILL.md Frontmatter & Spec
         run: |
-          echo "Validating SKILL.md existence and format..."
-          test -f skills/qrspi-methodology/SKILL.md
-          grep -q "^name: qrspi-methodology" skills/qrspi-methodology/SKILL.md
-          grep -q "^description:" skills/qrspi-methodology/SKILL.md
-          grep -q "^license: MIT" skills/qrspi-methodology/SKILL.md
+          echo "Validating all SKILL.md files in repository..."
+          for skill_file in skills/*/SKILL.md; do
+            echo "Checking ${skill_file}..."
+            test -f "${skill_file}"
+            grep -q "^name:" "${skill_file}"
+            grep -q "^description:" "${skill_file}"
+            grep -q "^license: MIT" "${skill_file}"
+          done
 
-      - name: Lint Shell Scripts
+      - name: Lint All Shell Scripts
         run: |
-          shellcheck .github/scripts/verify-security.sh
-          shellcheck skills/qrspi-methodology/scripts/verify-session.sh
-          shellcheck skills/qrspi-methodology/hooks/prompt-hook.sh
+          echo "Running shellcheck on all repository shell scripts..."
+          find . -name "*.sh" -not -path "*/.git/*" -exec shellcheck {} +
 
       - name: Run Repository Security & Integrity Audit
         run: |
           ./.github/scripts/verify-security.sh
 
-      - name: Test Session Validator Script
+      - name: Test Skill Verification Scripts
         run: |
+          echo "Testing QRSPI session validator..."
           ./skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/references/stage-templates
+          
+          echo "Testing Docker & Orchestration stack auditor..."
+          ./skills/docker-and-orchestration/scripts/verify-docker-stack.sh --help
