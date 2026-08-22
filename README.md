@@ -28,7 +28,7 @@ Install any skill directly into your project or globally on your system via the 
 npx skills add racastellanosm/agent-skills
 
 # Or install a specific skill
-npx skills add racastellanosm/agent-skills --skill docker-and-orchestration
+npx skills add racastellanosm/agent-skills --skill ${skill_name}
 
 # Install globally for all projects on your machine
 npx skills add racastellanosm/agent-skills -g
