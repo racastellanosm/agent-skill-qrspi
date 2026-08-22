@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.13.0] - 2026-08-22
+
+### Added
+- **Docker & Orchestration Agent Skill (`docker-and-orchestration`)**:
+  - Canonical Agent Skill package enforcing the Zero-Host-Dependencies engineering philosophy via Docker, split Compose topologies (`docker-compose.yml` + `docker-compose.dev.yml`), and unified Makefile orchestration.
+  - Multi-stage Dockerfile guidelines with Distroless/Scratch runtime patterns, non-root user policies (`USER 1000:1000`), and Docker Scout vulnerability scanning.
+  - Standardized Makefile contract taxonomy with adaptive engineering principles and ephemeral container test runners (`$(DOCKER_RUN)`).
+  - Built-in POSIX validator script (`skills/docker-and-orchestration/scripts/verify-docker-stack.sh`).
+  - Added new catalog grouping *"DevOps & Containerization"* in `skills.sh.json` and updated root documentation.
+
 ## [1.12.3] - 2026-08-21
 
 ### Changed

@@ -5,7 +5,7 @@
 **Audience:** AI agents and platform engineers contributing to or maintaining skills in this repository.  
 **Standard:** [agentskills.io Open Specification](https://agentskills.io/specification)  
 **Documentation & Code Language:** English (all code, templates, scripts, and documentation).  
-**Version:** 1.12.3  
+**Version:** 1.13.0  
 
 ---
 
@@ -33,22 +33,32 @@ This repository is the canonical reference implementation and distribution packa
 │   │   └── security.yml           # Security: Gitleaks secret scanning & least-privilege audit
 │   └── CODEOWNERS                 # Mandatory owner approval rules for critical paths
 ├── skills/
-│   └── qrspi-methodology/        # 📦 Canonical Agent Skill Package
+│   ├── qrspi-methodology/        # 📦 Canonical Agent Skill Package
+│   │   ├── SKILL.md               # Canonical Agent Skill definition (agentskills.io)
+│   │   ├── README.md              # Public documentation and usage guide
+│   │   ├── hooks/
+│   │   │   └── prompt-hook.sh     # Agent Lifecycle Hook (Claude Code / Gemini CLI)
+│   │   ├── references/
+│   │   │   ├── stage-templates/   # Modular stage templates (1 file per QRSPI stage)
+│   │   │   │   ├── 1-question.md
+│   │   │   │   ├── 2-research.md
+│   │   │   │   ├── 3-structure.md
+│   │   │   │   ├── 4-plan.md
+│   │   │   │   └── 5-implement.md
+│   │   │   ├── index-template.md  # Template for .qrspi/INDEX.md (Living ADR)
+│   │   │   └── phases-checklist.md # Compact phase-gate quality checklist
+│   │   └── scripts/
+│   │       └── verify-session.sh  # POSIX validator for modular QRSPI session directories
+│   └── docker-and-orchestration/ # 📦 Canonical Docker & Orchestration Skill Package
 │       ├── SKILL.md               # Canonical Agent Skill definition (agentskills.io)
 │       ├── README.md              # Public documentation and usage guide
-│       ├── hooks/
-│       │   └── prompt-hook.sh     # Agent Lifecycle Hook (Claude Code / Gemini CLI)
 │       ├── references/
-│       │   ├── stage-templates/   # Modular stage templates (1 file per QRSPI stage)
-│       │   │   ├── 1-question.md
-│       │   │   ├── 2-research.md
-│       │   │   ├── 3-structure.md
-│       │   │   ├── 4-plan.md
-│       │   │   └── 5-implement.md
-│       │   ├── index-template.md  # Template for .qrspi/INDEX.md (Living ADR)
-│       │   └── phases-checklist.md # Compact phase-gate quality checklist
+│       │   ├── makefile-orchestration.md # Targets contract, runners & examples
+│       │   ├── multi-stage-dockerfiles.md # Multi-stage patterns, distroless & security
+│       │   ├── compose-topologies.md # Split compose strategy (base vs dev)
+│       │   └── security-hardening.md # Container security invariants & audit checks
 │       └── scripts/
-│           └── verify-session.sh  # POSIX validator for modular QRSPI session directories
+│           └── verify-docker-stack.sh # POSIX validator for Makefiles & Dockerfiles
 ├── .gitignore                     # OS and editor ignore rules
 ├── AGENTS.md                      # Agent governance, harnessing, and release protocols
 ├── CHANGELOG.md                   # Version release notes following Keep a Changelog
@@ -65,11 +75,11 @@ The skill catalog supports installation via `npx skills add racastellanosm/agent
 
 | Target Harness | Global Scope Path | Local / Workspace Scope Path |
 | :--- | :--- | :--- |
-| **Standard (`agentskills.io`)** | `~/.agents/skills/qrspi-methodology/` | `.agents/skills/qrspi-methodology/` |
-| **Google Gemini (CLI / Antigravity)** | `~/.gemini/skills/qrspi-methodology/` | `.gemini/skills/qrspi-methodology/` |
-| **Anthropic Claude (Claude Code)** | `~/.claude/skills/qrspi-methodology/` | `.claude/skills/qrspi-methodology/` |
-| **OpenAI Codex / CLI** | `~/.codex/skills/qrspi-methodology/` | `.codex/skills/qrspi-methodology/` |
-| **OpenCode** | `~/.opencode/skills/qrspi-methodology/` | `.opencode/skills/qrspi-methodology/` |
+| **Standard (`agentskills.io`)** | `~/.agents/skills/<skill-name>/` | `.agents/skills/<skill-name>/` |
+| **Google Gemini (CLI / Antigravity)** | `~/.gemini/skills/<skill-name>/` | `.gemini/skills/<skill-name>/` |
+| **Anthropic Claude (Claude Code)** | `~/.claude/skills/<skill-name>/` | `.claude/skills/<skill-name>/` |
+| **OpenAI Codex / CLI** | `~/.codex/skills/<skill-name>/` | `.codex/skills/<skill-name>/` |
+| **OpenCode** | `~/.opencode/skills/<skill-name>/` | `.opencode/skills/<skill-name>/` |
 
 ---
 
@@ -78,7 +88,7 @@ The skill catalog supports installation via `npx skills add racastellanosm/agent
 - **Shellcheck Mandatory:** All `.sh` files must pass `shellcheck -s sh` with zero warnings.
 - **Strict File Permissions:**
   - Directories: `755` (`drwxr-xr-x`)
-  - Executables (`.github/scripts/*.sh`, `skills/qrspi-methodology/scripts/*.sh`, `skills/qrspi-methodology/hooks/*.sh`): `755` (`-rwxr-xr-x`)
+  - Executables (`.github/scripts/*.sh`, `skills/*/scripts/*.sh`, `skills/*/hooks/*.sh`): `755` (`-rwxr-xr-x`)
   - Documentation and templates (`SKILL.md`, `*.md`): `644` (`-rw-r--r--`)
 
 ---
@@ -91,11 +101,14 @@ Before proposing changes or creating releases, run the following verification su
 # 1. Validate session directory structure
 ./skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/references/stage-templates
 
-# 2. Run repository security & integrity audit (Trojan Source, anti-malware, URI checks)
+# 2. Validate Docker & Makefile stack structure (on target project)
+./skills/docker-and-orchestration/scripts/verify-docker-stack.sh ../family-vulnerability-assestment-for-schools
+
+# 3. Run repository security & integrity audit (Trojan Source, anti-malware, URI checks)
 ./.github/scripts/verify-security.sh
 
-# 3. Verify ShellCheck on all scripts
-shellcheck .github/scripts/verify-security.sh skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/hooks/prompt-hook.sh
+# 4. Verify ShellCheck on all scripts
+shellcheck .github/scripts/verify-security.sh skills/qrspi-methodology/scripts/verify-session.sh skills/qrspi-methodology/hooks/prompt-hook.sh skills/docker-and-orchestration/scripts/verify-docker-stack.sh
 ```
 
 ---

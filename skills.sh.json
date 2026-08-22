@@ -8,6 +8,13 @@
       "skills": [
         "qrspi-methodology"
       ]
+    },
+    {
+      "title": "DevOps & Containerization",
+      "description": "Zero-Host-Dependencies engineering workflow using Docker, Docker Compose, and unified Makefile orchestration.",
+      "skills": [
+        "docker-and-orchestration"
+      ]
     }
   ]
 }

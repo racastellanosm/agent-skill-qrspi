@@ -15,6 +15,7 @@ Built and published in strict compliance with the [Agent Skills Open Specificati
 | Skill | Category | Description | Triggers / Activation | Documentation |
 | :--- | :--- | :--- | :--- | :--- |
 | [`qrspi-methodology`](skills/qrspi-methodology) | **Engineering Methodology** | Enforces the deterministic 5-phase engineering protocol (Question, Research, Structure, Plan, Implement) with turn-termination gates and living ADR. | Complex features, architectural refactors, multi-file bug investigations, system migrations. | [📖 User Guide](skills/qrspi-methodology/README.md) · [⚙️ Spec](skills/qrspi-methodology/SKILL.md) |
+| [`docker-and-orchestration`](skills/docker-and-orchestration) | **DevOps & Containerization** | Enforces Zero-Host-Dependencies containerized workflows using Docker, split Compose topologies, and universal Makefile orchestration. | Setting up Docker/Makefiles, writing multi-stage Dockerfiles, configuring Compose, standardizing local dev commands. | [📖 User Guide](skills/docker-and-orchestration/README.md) · [⚙️ Spec](skills/docker-and-orchestration/SKILL.md) |
 
 ---
 
@@ -25,6 +26,9 @@ Install any skill directly into your project or globally on your system via the 
 ```bash
 # Add to current workspace / project
 npx skills add racastellanosm/agent-skills
+
+# Or install a specific skill
+npx skills add racastellanosm/agent-skills --skill docker-and-orchestration
 
 # Install globally for all projects on your machine
 npx skills add racastellanosm/agent-skills -g
@@ -54,22 +58,32 @@ Skills in this catalog are compatible with **77+ agent harnesses**, including:
 │   └── scripts/
 │       └── verify-security.sh # POSIX security & integrity auditor
 ├── skills/
-│   └── qrspi-methodology/    # 📦 Canonical QRSPI Agent Skill Package
-│       ├── SKILL.md          # Canonical Agent Skill specification & prompt rules
-│       ├── README.md         # Detailed skill documentation & user guide
-│       ├── hooks/
-│       │   └── prompt-hook.sh # Agent Lifecycle Hook (Claude Code / Gemini CLI)
+│   ├── qrspi-methodology/    # 📦 Canonical QRSPI Agent Skill Package
+│   │   ├── SKILL.md          # Canonical Agent Skill specification & prompt rules
+│   │   ├── README.md         # Detailed skill documentation & user guide
+│   │   ├── hooks/
+│   │   │   └── prompt-hook.sh # Agent Lifecycle Hook (Claude Code / Gemini CLI)
+│   │   ├── references/
+│   │   │   ├── stage-templates/ # Modular stage templates (1-question.md -> 5-implement.md)
+│   │   │   │   ├── 1-question.md
+│   │   │   │   ├── 2-research.md
+│   │   │   │   ├── 3-structure.md
+│   │   │   │   ├── 4-plan.md
+│   │   │   │   └── 5-implement.md
+│   │   │   ├── index-template.md # Template for living ADR
+│   │   │   └── phases-checklist.md # Quick-reference phase gate checklist
+│   │   └── scripts/
+│   │       └── verify-session.sh  # Modular session validator
+│   └── docker-and-orchestration/ # 📦 Canonical Docker & Orchestration Skill Package
+│       ├── SKILL.md          # Canonical Agent Skill specification (agentskills.io)
+│       ├── README.md         # Public documentation and usage guide
 │       ├── references/
-│       │   ├── stage-templates/ # Modular stage templates (1-question.md -> 5-implement.md)
-│       │   │   ├── 1-question.md
-│       │   │   ├── 2-research.md
-│       │   │   ├── 3-structure.md
-│       │   │   ├── 4-plan.md
-│       │   │   └── 5-implement.md
-│       │   ├── index-template.md # Template for living ADR
-│       │   └── phases-checklist.md # Quick-reference phase gate checklist
+│       │   ├── makefile-orchestration.md # Targets contract, runners & examples
+│       │   ├── multi-stage-dockerfiles.md # Multi-stage patterns, distroless & security
+│       │   ├── compose-topologies.md # Split compose strategy (base vs dev)
+│       │   └── security-hardening.md # Container security invariants & audit checks
 │       └── scripts/
-│           └── verify-session.sh  # Modular session validator
+│           └── verify-docker-stack.sh # POSIX validator for Makefiles & Dockerfiles
 ├── AGENTS.md                 # Repository governance & agent directives
 ├── CHANGELOG.md              # Version history following Keep a Changelog
 ├── LICENSE                   # MIT License
